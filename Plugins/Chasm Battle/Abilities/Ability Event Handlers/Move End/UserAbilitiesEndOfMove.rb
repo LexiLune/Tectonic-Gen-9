@@ -276,6 +276,46 @@ BattleHandlers::UserAbilityEndOfMove.add(:SPACEINTERLOPER,
   }
 )
 
+BattleHandlers::UserAbilityEndOfMove.add(:SLEIGHTOFHAND,
+  proc { |ability, user, targets, move, battle|
+      next if move.snatched
+      next if move.id == :STRUGGLE 
+      next if move.calcType == user.pbTypes(true)[0] && move.calcType == user.pbTypes(true)[1] && user.effects[:Type3].nil?
+      battle.pbShowAbilitySplash(user, ability)
+      type = move.calcType
+      newTypeName = GameData::Type.get(type).name
+      if user.pbTypes(true)[1] != user.pbTypes(true)[0]
+        choices = []
+        choice1 = GameData::Type.get(user.pbTypes(true)[0]).name
+        choice2 = GameData::Type.get(user.pbTypes(true)[1]).name
+        choice3 = GameData::Type.get(user.effects[:Type3]).name if user.effects[:Type3]
+        choices.push(choice1)
+        choices.push(choice2)
+        choices.push(choice3) if user.effects[:Type3]
+        if battle.autoTesting
+          chosenIndex = rand(1)
+        elsif !user.pbOwnedByPlayer? # Trainer AI
+          chosenIndex = 0
+        else
+          chosenIndex = battle.scene.pbChooseWithThinkingLoop(_INTL("Which type will change?"), choices)
+          oldTypeName = choices[chosenIndex]
+        end
+        if chosenIndex == user.effects[:Type3].to_s
+          user.applyEffect(:Type3, type)
+        elsif chosenIndex.upcase.to_sym == type
+          battle.pbDisplay(_INTL("{1} keeps its types the same... for now.", user.pbThis))
+        else
+          choices.map! { |x| x == choices[chosenIndex] ? type : x.upcase.to_sym }
+          user.pbChangeTypes(choices)
+          battle.pbDisplay(_INTL("{1} swapped its {2} type for {3}!", user.pbThis, oldTypeName, newTypeName))
+        end
+      else
+        user.pbChangeTypes(type)
+      end
+      battle.pbHideAbilitySplash(user)
+  }
+)
+
 BattleHandlers::UserAbilityEndOfMove.add(:SPARESCALES,
   proc { |ability, user, _targets, move, _battle, _switchedBattlers|
       next unless move.calcTypes.intersect?(%i[GRASS GROUND STEEL])
@@ -766,6 +806,14 @@ BattleHandlers::UserAbilityEndOfMove.add(:HITANDRUN,
       next if user.dummy
       next unless move.damagingMove?
       next unless targets.any? { |b| !b.damageState.unaffected && b.damageState.totalCalcedDamage < b.totalhp / 2 }
+      user.applyEffect(:HitAndRunSwitch)
+  }
+)
+
+BattleHandlers::UserAbilityEndOfMove.add(:NOWYOUSEEME,
+  proc { |_ability, user, _targets, move, _battle, _switchedBattlers|
+      next if user.dummy
+      next unless move.statusMove?
       user.applyEffect(:HitAndRunSwitch)
   }
 )

@@ -44,6 +44,57 @@ class PokeBattle_Move_FailsIfTargetActed < PokeBattle_Move
 end
 
 #===============================================================================
+# Jinxes the target. If they intend to atttack, and haven't yet, causes them to damage
+# themself. Fails if this isn't the user's first turn. (Meowscarada's Flower Trick)
+#===============================================================================
+class PokeBattle_Move_JinxSuckerBackhand < PokeBattle_Move
+    def pbMoveFailed?(user, _targets, show_message)
+        unless user.firstTurn?
+            @battle.pbDisplay(_INTL("But it failed, since it isn't {1}'s first turn!", user.pbThis(true))) if show_message
+            return true
+        end
+        return false
+    end
+    
+    def pbEffectAgainstTarget(user, target)
+        if target.effectActive?(:Jinxed)
+          @battle.pbDisplay(_INTL("{1} is already jinxed!", target.pbThis(true))) if show_message
+        else
+          target.applyEffect(:Jinxed, applyEffectDurationModifiers(DEFAULT_JINX_DURATION, user))
+        end
+        oppMove = @battle.choices[target.index][2]
+        if oppMove && @battle.choices[target.index][0] == :UseMove
+          if oppMove.function != "UseMoveTargetIsAboutToUse" && (target.movedThisRound? || oppMove.statusMove?)
+            return
+          end
+          target.pbConfusionDamage(_INTL("{1} fell for {2}'s tricks and hurt itself!", target.pbThis(true), user.pbThis(true)), false, selfHitBasePower(target.level))
+        end
+    end
+
+    def getTargetAffectingEffectScore(user, target)
+        score = 0
+        score -= getMultiStatUpEffectScore(ATTACKING_STATS_3, user, target, evaluateThreat: false)
+        score -= 70 if targetIsUnaware?(target, aiCheck: true)
+        score += getMultiStatUpEffectScore(ATTACKING_STATS_3, user, user, evaluateThreat: false) if user.hasActiveAbilityAI?(:PETTY)
+        return score
+    end
+
+    def calculateDamageForHitAI(user, target, types, baseDmg, numTargets, aiContext = nil)
+        damage = calculateDamageForHit(user, target, types, baseDmg, numTargets, true, aiContext)
+        damage *= 1.75 unless targetIsUnaware?(target, aiCheck: true)
+        return damage
+    end
+
+    def getDetailsForMoveDex(detailsList = [])
+        detailsList << _INTL("If the target intends to attack, it hits itself similarly to Backhand, with a base power of 20 plus its level, capped at 70.")
+    end
+
+    def getEffectScore(user, target)
+        return getJinxEffectScore(user, target)
+    end
+end
+
+#===============================================================================
 # Fails if this isn't the user's first turn. (First Impression)
 #===============================================================================
 class PokeBattle_Move_FailsIfNotUserFirstTurn < PokeBattle_Move

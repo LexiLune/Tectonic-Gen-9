@@ -1,6 +1,0 @@
-[TESTTRAINERTYPE,Test Trainer]
-Policies = TEST_POLICY
-Pokemon = TESTPOKEMON,15
-	Moves = TESTMOVE
-	AbilityIndex = 0 # Test Ability
-	Flags = Test

@@ -1,52 +1,65 @@
 #-------------------------------
-[TESTPOKEMON]
-Name = Test Pokemon
-Type1 = NORMAL
+[SPRIGATITO]
+Name = Sprigatito
+Type1 = GRASS
 # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
-BaseStats = 60,60,60,60,60,60
-# Total = 360
-GenderRate = Female50Percent
-GrowthRate = Medium
-BaseEXP = 64
-Rareness = 150
+BaseStats = 40,70,40,68,70,60
+# Total = 353
+BaseEXP = 69
+Rareness = 115
 Happiness = 50
-Abilities = TESTABILITY
-Moves = 1,TESTMOVE
-LineMoves = TESTMOVE
-Tribes = DECEIVER,DEBUG_TESTTRIBE
+Abilities = NOWYOUSEEME,PRANKSTER
+Moves = 1,LEAFAGE,1,LEER,4,BLINDSIDE,8,ASSIST,12,PLANTDOUBT,16,HEARTSTAMP,20,ENCORE,24,FLASHSEED,28,MEFIRST,32,BUCKETDROP,36,PSYCHESWITCH,40,LEAFBLADE,44,TAUNT,48,TOTALCONTROL,52,MISADVENTURE,56,PUZZLEROOM,60,PETALDANCE,64,FUTURESIGHT
+LineMoves = FAKETEARS,CONFIDE,SMIRK,TEARFULLOOK,TICKLE,PRANK,MINDLINK,SWORDSDANCE,DREAMDANCE,AGILITY,WORKUP,CALMMIND,POISONIVY,SWEETKISS,LULLABY,ILLWISHES,DISABLE,ODDROOM,POLARIZEDROOM,REST,AROMATHERAPY,SUBSTITUTE,BACKHAND,HELPINGHAND,SUNSHINE,SNATCH,PSYCHUP,ROLEPLAY,SKILLSWAP,SWITCHEROO,TOPSYTURVY,SPOTLIGHT,ENTRAINMENT,SPIKES,PLANAHEAD,HIDDENSTRIKE,FAKEOUT,COVET,FACADE,LASTRESORT,TRUMPCARD,RAZORLEAF,SOLARGLIDE,BULLETSEED,WHIPKICK,POWERWHIP,CAMOUFLAGE,ESSENCEARROW,BLOSSOM,AUTUMNBLAST,ENERGYBALL,HOLLYCHARM,LEAFSTORM,GRASSKNOT,SAPPINGJEALOUSY,MAGEHAND,KINETICGRIP,HUNDREDHANDCLAP,PSYCHICFANGS,PSYCHOSCISSION,OMNISCIENTBLOW,SCRUTINIZE,EXPLOIT,PSYPIERCE,PIERCINGDOUBT,DREAMABSORB,FUTURESIGHT,VACUUMWAVE,AURAPULSE,AURAFLUX,AURASPHERE,SECRETTECHNIQUE,HOP,AERIALACE,POUNCE,ACROBATICS,BITE,PILFER,THIEF,FEINTATTACK,SUCKERPUNCH,KNOCKOFF,THROATCHOP,FOULPLAY,LURK,TEASE,SCAM,DARKALLURE,ASSURANCE,EAGERTICKLING,MISHAP,HUMBLE,DISARMINGVOICE,ENCHANTINGSONG,TRUENAME,ENCHANTEDARROW,STROKEOFMIDNIGHT,UTURN
+Tribes = CHARMER,DECEIVER,ESOTERIC
 StepsToHatch = 5355
-Height = 0.7
-Weight = 6.9
-Color = Green
-Shape = Head
-Kind = Test
-Pokedex = This Pokemon exists just to test the PBS Extensions system.
-Generation = 0
-Evolutions = TESTPOKEMON2,Level,30
-# Makes it not appear in game except in DEBUG mode
-Flags = Test
+Height = 0.4
+Weight = 4.1
+Kind = Grass Cat
+Pokedex = The sweet scent its body gives off mesmerizes those around it. The scent grows stronger when this Pokémon is in the sun
+Generation = 9
+Flags = Cat
+Evolutions = FLORAGATO,Level,16
 #-------------------------------
-[TESTPOKEMON2]
-Name = Test Pokemon 2
-Type1 = NORMAL
+[FLORAGATO]
+Name = Floragato
+Type1 = GRASS
+Type2 = PSYCHIC
 # HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
-BaseStats = 80,80,80,80,80,80
-# Total = 480
-GenderRate = Female50Percent
-GrowthRate = Medium
-BaseEXP = 128
-Rareness = 150
+BaseStats = 60,85,50,93,85,80
+# Total = 453
+BaseEXP = 158
+Rareness = 50
 Happiness = 50
-Abilities = TESTABILITY
-Moves = 0,TESTMOVE,1,TESTMOVE
-Tribes = DECEIVER
+Abilities = NOWYOUSEEME,SLEIGHTOFHAND
+Moves = 0,MAGICALLEAF
+Tribes = CHARMER,DECEIVER,ESOTERIC
 StepsToHatch = 5355
-Height = 1.7
-Weight = 9.6
-Color = Green
-Shape = Head
-Kind = Test 2
-Pokedex = This Pokemon exists just to test the PBS Extensions system. Again!
-Generation = 0
-# Makes it not appear in game except in DEBUG mode
-Flags = Test
+Height = 0.9
+Weight = 12.2
+Kind = Grass Cat
+Pokedex = Floragato deftly wields the vine hidden beneath its long fur, slamming the hard flower bud against its opponents.
+Generation = 9
+Flags = Cat
+Evolutions = MEOWSCARADA,Level,36
+#-------------------------------
+[MEOWSCARADA]
+Name = Meowscarada
+Type1 = GRASS
+Type2 = PSYCHIC
+# HP, Attack, Defense, Speed, Sp. Atk, Sp. Def
+BaseStats = 70,105,60,123,105,95
+# Total = 558
+BaseEXP = 251
+Rareness = 35
+Happiness = 50
+Abilities = NOWYOUSEEME,SLEIGHTOFHAND
+Moves = 0,FLOWERTRICK
+Tribes = CHARMER,DECEIVER,ESOTERIC
+StepsToHatch = 5355
+Height = 1.5
+Weight = 31.2
+Kind = Magician
+Pokedex = With skillful misdirection, it rigs foes with pollen-packed flower bombs. Meowscarada sets off the bombs before its foes realize what’s going on.
+Generation = 9
+Flags = Cat

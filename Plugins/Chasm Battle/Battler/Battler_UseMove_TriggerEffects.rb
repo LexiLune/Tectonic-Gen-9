@@ -198,7 +198,7 @@ user.pbThis(true)))
         end
         # Hit and Run
         if user.effectActive?(:HitAndRunSwitch) && !switchedBattlers.include?(user.index)
-            if @battle.triggeredSwitchOut(user.index, ability: :HITANDRUN)
+            if @battle.triggeredSwitchOut(user.index, ability: :HITANDRUN) || @battle.triggeredSwitchOut(user.index, ability: :NOWYOUSEEME)
                 user.pbEffectsOnSwitchIn(true)
                 switchedBattlers.push(user.index)
             else

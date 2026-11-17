@@ -1,6 +1,8 @@
 #-------------------------------
-[TESTABILITY]
-Name = Test Ability
-Description = This ability exists just to showcase the PBS Extensions system.
-# Makes it not appear in game except in DEBUG mode
-Flags = Test
+[NOWYOUSEEME]
+Name = Now You See Me...
+Description = Switches out after using a status move.
+#-------------------------------
+[SLEIGHTOFHAND]
+Name = Sleight of Hand
+Description = After using a move, changes one of its types to match it. You can choose which type changes.
