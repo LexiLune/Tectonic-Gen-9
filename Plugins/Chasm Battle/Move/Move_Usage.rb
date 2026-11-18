@@ -51,6 +51,7 @@ class PokeBattle_Move
         return selectBestCategory(user, targets[0]) if punchingMove? && user.hasActiveAbility?(:MYSTICFIST)
         return selectBestCategory(user, targets[0]) if rampagingMove? && user.hasActiveAbility?(:WREAKHAVOC)
         return selectBestCategory(user, targets[0]) if pulseMove? && user.hasActiveAbility?(:MANIFESTATION)
+        return selectBestCategory(user, targets[0]) if soundMove? && user.hasActiveAbility?(:SOULSONG)
         return 0 if @category == 1 && user.hasActiveItem?(:STRENGTHHERB)
         return 1 if @category == 0 && user.hasActiveItem?(:INTELLECTHERB)
         return selectBestCategory(user) if adaptiveMove?

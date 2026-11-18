@@ -276,6 +276,14 @@ BattleHandlers::UserAbilityEndOfMove.add(:SPACEINTERLOPER,
   }
 )
 
+BattleHandlers::UserAbilityEndOfMove.add(:SOULSONG,
+  proc { |ability, user, targets, move, _battle|
+      next unless move.damagingMove?
+      next unless move.soundMove?
+      user.pbRecoverHPFromMultiDrain(targets, 0.3, user: user, ability: ability)
+  }
+)
+
 BattleHandlers::UserAbilityEndOfMove.add(:SLEIGHTOFHAND,
   proc { |ability, user, targets, move, battle|
       next if move.snatched

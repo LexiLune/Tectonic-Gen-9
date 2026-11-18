@@ -6,3 +6,15 @@ Description = Switches out after using a status move.
 [SLEIGHTOFHAND]
 Name = Sleight of Hand
 Description = After using a move, changes one of its types to match it. You can choose which type changes.
+#-------------------------------
+[SOULSONG]
+Name = Soul Song
+Description = Sound moves target the lower of Defense and Sp. Def, and drain 33% of damage dealt.
+#-------------------------------
+[RAINDANCER]
+Name = Rain Dancer
+Description = This Pokémon's Attack and Speed are increased by 30% during a rainstorm.
+#-------------------------------
+[STYLISHSTEPS]
+Name = Stylish Steps
+Description = Using a dance move boosts the next kick move's power by 50%, and vice versa.

@@ -40,6 +40,12 @@ BattleHandlers::SpeedCalcAbility.add(:CLOUDBURST,
   }
 )
 
+BattleHandlers::SpeedCalcAbility.add(:RAINDANCER,
+  proc { |ability, battler, mult|
+      next mult * 1.3 if battler.battle.rainy?
+  }
+)
+
 BattleHandlers::SpeedCalcAbility.add(:UNBURDEN,
   proc { |ability, battler, mult|
       next mult * 2 if battler.effectActive?(:ItemLost) && !battler.hasAnyItem?

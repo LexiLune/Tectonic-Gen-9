@@ -85,6 +85,28 @@ class PokeBattle_Move_RaisesTargetSpd1 < PokeBattle_Move
 end
 
 #===============================================================================
+# Targets' speed is raised, then allies' speed is raised too.
+# (Skeledirge's Torch Song)
+#===============================================================================
+class PokeBattle_Move_RaiseEveryoneSpeed < PokeBattle_Move
+    
+    def pbEndOfMoveUsageEffect(user, targets, _numHits, _switchedBattlers)
+        user.tryRaiseStat(:SPECIAL_ATTACK, user, move: self, showFailMsg: true)
+        @battle.eachSameSideBattler(user) do |b|
+            next if b.index == user.index
+            b.tryRaiseStat(:SPECIAL_ATTACK, user, move: self, showFailMsg: true)
+        end
+        @battle.eachOtherSideBattler(user) do |b|
+            b.tryRaiseStat(:SPECIAL_ATTACK, user, move: self, showFailMsg: true)
+        end
+    end
+
+    def getTargetAffectingEffectScore(user, target)
+        return -getMultiStatUpEffectScore([:SPECIAL_ATACK, 1], user, target, evaluateThreat: false)
+    end
+end
+
+#===============================================================================
 # Fractures the user, and always critical hits. (Flechettes)
 #===============================================================================
 class PokeBattle_Move_MoveFracturesSelfCriticalHits < PokeBattle_Move

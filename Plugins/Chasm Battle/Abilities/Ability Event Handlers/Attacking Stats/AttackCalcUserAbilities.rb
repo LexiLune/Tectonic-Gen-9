@@ -137,6 +137,13 @@ BattleHandlers::AttackCalcUserAbility.add(:FROSTFANGED,
   }
 )
 
+BattleHandlers::AttackCalcUserAbility.add(:RAINDANCER,
+  proc { |ability, user, battle, attackMult|
+      attackMult *= 1.3 if battle.rainy?
+      next attackMult
+  }
+)
+
 BattleHandlers::AttackCalcUserAbility.add(:FEELTHEBURN,
   proc { |ability, user, battle, attackMult|
       attackMult *= 1.75
@@ -171,6 +178,24 @@ BattleHandlers::AttackCalcUserAbility.add(:TOOTHANDCLAW,
 
     next if currentMoveData.bitingMove?
     attackMult *= 1.5 if previousMoveData.bitingMove?
+    next attackMult
+  }
+)
+
+BattleHandlers::AttackCalcUserAbility.add(:STYLISHSTEPS,
+  proc { |ability, user, battle, attackMult|
+    previousMoveID = user.moveUsageHistory[1] || nil
+    currentMoveID = user.moveUsageHistory[0] || nil
+
+    next if currentMoveID.nil?
+    next if previousMoveID.nil?
+      
+    previousMoveData = battle.getBattleMoveInstanceFromID(previousMoveID)
+    currentMoveData = battle.getBattleMoveInstanceFromID(currentMoveID)
+
+    next if !previousMoveData.danceMove? && !previousMoveData.kickingMove?
+    attackMult *= 1.5 if previousMoveData.kickingMove? && currentMoveData.danceMove?
+    attackMult *= 1.5 if previousMoveData.danceMove? && currentMoveData.kickingMove?
     next attackMult
   }
 )
