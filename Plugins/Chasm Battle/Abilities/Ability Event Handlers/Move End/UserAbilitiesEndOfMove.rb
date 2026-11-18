@@ -332,6 +332,14 @@ BattleHandlers::UserAbilityEndOfMove.add(:SPARESCALES,
   }
 )
 
+BattleHandlers::UserAbilityEndOfMove.add(:FASTIDIOUS,
+  proc { |ability, user, _targets, move, _battle, _switchedBattlers|
+      next unless move.statusMove?
+      healingMessage = _INTL("{1} meticulously cleans itself up.", user.pbThis)
+      user.applyFractionalHealing(1.0 / 12.0, ability: ability, customMessage: healingMessage, canOverheal: true)
+  }
+)
+
 BattleHandlers::UserAbilityEndOfMove.add(:POWERLIFTER,
   proc { |ability, user, targets, move, _battle, switchedBattlers|
       next if user.dummy

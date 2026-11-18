@@ -461,6 +461,12 @@ MultipleForms.register(:EISCUE, {
   },
 })
 
+MultipleForms.register(:LOKIX, {
+  "getFormOnLeavingBattle" => proc { |pkmn, _battle, _usedInBattle, endBattle|
+      next 0
+  },
+})
+
 MultipleForms.register(:URSHIFU,{
   "onSetForm" => proc { |pkmn, form, oldForm|
     form_moves = GameData::Species.get(:URSHIFU).form_specific_moves

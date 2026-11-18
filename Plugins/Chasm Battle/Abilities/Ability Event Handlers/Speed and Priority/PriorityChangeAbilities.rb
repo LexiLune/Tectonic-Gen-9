@@ -13,9 +13,21 @@ BattleHandlers::PriorityChangeAbility.add(:TRIAGE,
   }
 )
 
+BattleHandlers::PriorityChangeAbility.add(:FASTIDIOUS,
+  proc { |_ability, _battler, move, _pri, _targets = nil, _aiCheck = false|
+      next -1 if move.statusMove?
+  }
+)
+
 BattleHandlers::PriorityChangeAbility.add(:ENVY,
   proc { |_ability, _battler, _move, _pri, targets = nil, _aiCheck = false|
       next 1 if targets && targets.length == 1 && targets[0].hasRaisedStatSteps?
+  }
+)
+
+BattleHandlers::PriorityChangeAbility.add(:SUBTERFUGE,
+  proc { |_ability, _battler, _move, _pri, targets = nil, _aiCheck = false|
+      next 1 if targets && targets.length == 1 && targets[0].hasLoweredStatSteps?
   }
 )
 

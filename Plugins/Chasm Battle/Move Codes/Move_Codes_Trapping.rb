@@ -209,6 +209,34 @@ class PokeBattle_Move_TrapAndFrostbiteTarget < PokeBattle_Move_TrapTarget
 end
 
 #===============================================================================
+# Traps the target and dizzies them. (Oinkologne's Entrancing Aroma)
+#===============================================================================
+class PokeBattle_Move_TrapAndDizzyTarget < PokeBattle_Move_TrapTarget
+    def pbFailsAgainstTarget?(user, target, show_message)
+        return false if damagingMove?
+        if target.effectActive?(:MeanLook) && !target.canDizzy?(user, false, self)
+            if show_message
+                @battle.pbDisplay(_INTL("But it failed, since {1} is already trapped and can't be dizzied!", target.pbThis(true)))
+            end
+            return true
+        end
+        return false
+    end
+
+    def pbEffectAgainstTarget(user, target)
+        super
+        target.applyDizzy(user) if target.canDizzy?(user, false)
+    end
+
+    def getTargetAffectingEffectScore(user, target)
+        score = 0
+        score += 50 unless target.effectActive?(:MeanLook)
+        score += getDizzyEffectScore(user, target)
+        return score
+    end
+end
+
+#===============================================================================
 # No Pokémon can switch out or flee until the end of the next round.
 #===============================================================================
 class PokeBattle_Move_TrapAllBattlersForOneTurn < PokeBattle_Move

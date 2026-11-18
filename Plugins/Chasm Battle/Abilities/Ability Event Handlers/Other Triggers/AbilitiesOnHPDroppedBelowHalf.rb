@@ -106,6 +106,17 @@ BattleHandlers::AbilityOnHPDroppedBelowHalf.add(:VOIDWARRANTY,
   }
 )
 
+BattleHandlers::AbilityOnHPDroppedBelowHalf.add(:ALLOUT,
+  proc { |ability, battler, battle, endOfBattle|
+      next if battler.fainted?
+      next unless battler.species == :LOKIX && battler.form == 0
+      
+      battle.pbShowAbilitySplash(battler, ability)
+      battler.pbChangeForm(1, _INTL("{1} braced itself and entered Showdown Mode!", battler.pbThis))
+      battle.pbHideAbilitySplash(battler)
+  }
+)
+
 BattleHandlers::AbilityOnHPDroppedBelowHalf.add(:BATTLEHARDENED,
   proc { |ability, battler, _battle|
       next if battler.effectActive?(:BattleHardened)

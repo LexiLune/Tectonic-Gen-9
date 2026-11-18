@@ -100,6 +100,16 @@ BattleHandlers::EOREffectAbility.add(:SINKINGFEELING,
   }
 )
 
+BattleHandlers::EOREffectAbility.add(:SICKLYSWEET,
+  proc { |ability, battler, battle|
+      battler.eachOther do |b|
+          next unless b.dizzy?
+          b.pbLowerMultipleStatSteps(ATTACKING_STATS_2, battler, ability: ability)
+          battle.pbHideAbilitySplash(battler)
+      end
+  }
+)
+
 BattleHandlers::EOREffectAbility.add(:FLOURISHING,
   proc { |ability, battler, battle|
       # A Pokémon's turnCount is 0 if it became active after the beginning of a

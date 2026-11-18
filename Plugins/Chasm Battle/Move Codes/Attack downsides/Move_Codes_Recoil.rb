@@ -26,6 +26,16 @@ end
 
 #===============================================================================
 # User takes recoil damage equal to 1/3 of the damage this move dealt.
+# Always results in a critical hit. (Lokix's Axe Kick)
+#===============================================================================
+class PokeBattle_Move_AlwaysCriticalHitRecoilThirdOfDamageDealt < PokeBattle_RecoilMove
+    def pbCriticalOverride(_user, _target); return 1; end
+    
+    def recoilFactor; return 1.0 / 3.0; end
+end
+
+#===============================================================================
+# User takes recoil damage equal to 1/3 of the damage this move dealt.
 # May paralyze the target.
 #===============================================================================
 class PokeBattle_Move_RecoilThirdOfDamageDealtNumbTarget < PokeBattle_RecoilMove

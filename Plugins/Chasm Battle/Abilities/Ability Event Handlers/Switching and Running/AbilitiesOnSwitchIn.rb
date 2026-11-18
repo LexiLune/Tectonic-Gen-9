@@ -311,6 +311,15 @@ BattleHandlers::AbilityOnSwitchIn.add(:TRIAGE,
   }
 )
 
+BattleHandlers::AbilityOnSwitchIn.add(:SUBTERFUGE,
+  proc { |ability, battler, battle, aiCheck|
+      next 0 if aiCheck
+      battle.pbShowAbilitySplash(battler, ability)
+      battle.pbDisplay(_INTL("{1} is watching for an opening!", battler.pbThis))
+      battle.pbHideAbilitySplash(battler)
+  }
+)
+
 BattleHandlers::AbilityOnSwitchIn.add(:LEADDANCER,
   proc { |ability, battler, battle, aiCheck|
       next 0 if aiCheck

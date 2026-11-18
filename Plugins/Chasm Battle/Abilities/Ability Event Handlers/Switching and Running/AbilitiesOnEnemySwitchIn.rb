@@ -9,6 +9,18 @@ BattleHandlers::AbilityOnEnemySwitchIn.add(:DETERRENT,
     }
 )
 
+#===============================================================================
+# Whenever an opponent switches in while a Pokemon with this ability is active,
+# the switcher's Speed is lowered by 3 steps. (Spidops' Web Weaver)
+#===============================================================================
+BattleHandlers::AbilityOnEnemySwitchIn.add(:WEBWEAVER,
+    proc { |ability, switcher, bearer, battle|
+        battle.pbShowAbilitySplash(bearer, ability)
+        switcher.tryLowerStat(:SPEED, bearer, increment: 3, showFailMsg: true)
+        battle.pbHideAbilitySplash(bearer)
+    }
+)
+
 ############################################
 # Ability Code for cut or unused abilities
 ############################################

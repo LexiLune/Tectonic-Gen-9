@@ -18,3 +18,24 @@ Description = This Pokémon's Attack and Speed are increased by 30% during a rai
 [STYLISHSTEPS]
 Name = Stylish Steps
 Description = Using a dance move boosts the next kick move's power by 50%, and vice versa.
+#-------------------------------
+[FASTIDIOUS]
+Name = Fastidious
+Description = Status moves have -1 priority, but heal for 1/12 max HP after use. This can overheal.
+#-------------------------------
+[SICKLYSWEET]
+Name = Sickly-Sweet
+Description = At the end of each turn, lowers other dizzied Pokémon's Attack and Sp. Atk by two steps.
+#-------------------------------
+[SUBTERFUGE]
+Name = Subterfuge
+Description = This Pokémon's moves have +1 priority against single targets with decreased stats.
+#-------------------------------
+[WEBWEAVER]
+Name = Web Weaver
+Description = Opponents who switch in have their Speed lowered by 3 steps.
+#-------------------------------
+[ALLOUT]
+Name = All Out
+Description = When HP drops below half, enters Showdown Mode until it switches out. Ability becomes Hustle.
+Flags = Immutable
