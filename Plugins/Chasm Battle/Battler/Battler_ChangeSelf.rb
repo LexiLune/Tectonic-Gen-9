@@ -347,6 +347,17 @@ class PokeBattle_Battler
         # And consumed a gem, etc. in the use of that move
         consumeMoveTriggeredItems(self)
 
+        if hasActiveAbility?(:FRESHSTART, true) && countsAs?(:MAUSHOLD)
+            showMyAbilitySplash(:FRESHSTART)
+            deEvolveSpecies
+            self.hp = @totalhp
+            refreshDataBox
+            battle.scene.pbRefresh
+            @battle.pbDisplay(_INTL("{1} devolved into Tandemaus for the battle!", pbThis))
+            hideMyAbilitySplash
+            return
+        end
+
         pbShowFaintingMessage if showMessage
 
         unless @dummy
@@ -484,8 +495,7 @@ class PokeBattle_Battler
             @type2 = newType
             disableEffect(:Type3)
         end
-        disableEffect(:BurnUp)
-        disableEffect(:Sublimate)
+        disableEffect(:LostType)
         disableEffect(:Roost)
         refreshDataBox
     end
@@ -684,6 +694,39 @@ class PokeBattle_Battler
         @spdef   = newStats[:SPECIAL_DEFENSE]
         @speed   = newStats[:SPEED]
         disableBaseStatEffects
+    end
+
+    def deEvolveSpecies
+        deEvolution = GameData::Species.get(technicalSpecies).get_previous_species
+        @battle.scene.pbChangePokemon(self, @pokemon, deEvolution)
+        newSpeciesData = GameData::Species.get(deEvolution)
+        applyEffect(:Transform)
+        if pbOwnSide.effectActive?(:DevolvedAllBattle)
+            pbOwnSide.effects[:DevolvedAllBattle][pokemonIndex] = deEvolution
+        else
+            pbOwnSide.effects[:DevolvedAllBattle] = {
+                pokemonIndex => deEvolution,
+            }
+            hpPercentage = (@hp / @totalhp).floor
+        end
+        pbChangeTypes(deEvolution)
+
+        legalAbilities = newSpeciesData.legalAbilities
+        newAbility = legalAbilities[@pokemon.ability_index] || legalAbilities[0]
+        replaceAbility(newAbility) unless hasAbility?(newAbility)
+
+        newStats = @pokemon.getCalculatedStats(deEvolution)
+        @totalhp = newStats[:HP]
+        @attack  = newStats[:ATTACK]
+        @defense = newStats[:DEFENSE]
+        @spatk   = newStats[:SPECIAL_ATTACK]
+        @spdef   = newStats[:SPECIAL_DEFENSE]
+        @speed   = newStats[:SPEED]
+        disableBaseStatEffects
+        
+        self.hp = (@totalhp * hpPercentage).floor if hpPercentage
+        refreshDataBox
+        battle.scene.pbRefresh
     end
 
     def pbHyperMode; end

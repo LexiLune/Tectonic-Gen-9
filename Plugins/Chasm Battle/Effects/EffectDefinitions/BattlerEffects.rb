@@ -98,43 +98,18 @@ GameData::BattleEffect.register_effect(:Battler, {
 })
 
 GameData::BattleEffect.register_effect(:Battler, {
-    :id => :BurnUp,
-    :real_name => "Burnt Up",
-    :info_displayed => false,
-    :avatars_purge => true,
-    :apply_proc => proc do |battle, battler, _value|
-        battle.pbDisplay(_INTL("{1} lost its Fire-Type!", battler.pbThis))
-        battle.scene.pbRefresh
+    :id => :LostType,
+    :real_name => "Lost Type",
+    :type => :Array,
+    :info_custom_description => proc do |value, _string, descriptionArray|
+        value.each do |typeLost|
+            descriptionArray.push(GameData::Type.get(typeLost).name)
+        end
     end,
     :stay_in_rating_proc => proc do |_battle, _battler, _value, stay_in_rating|
         stay_in_rating -= 15
         next stay_in_rating
     end
-})
-
-GameData::BattleEffect.register_effect(:Battler, {
-    :id => :Sublimate,
-    :real_name => "Sublimated",
-    :info_displayed => false,
-    :avatars_purge => true,
-    :apply_proc => proc do |battle, battler, _value|
-        battle.pbDisplay(_INTL("{1} lost its Ice-type!", battler.pbThis))
-        battle.scene.pbRefresh
-    end,
-    :stay_in_rating_proc => proc do |_battle, _battler, _value, stay_in_rating|
-        stay_in_rating -= 15
-        next stay_in_rating
-    end
-})
-
-GameData::BattleEffect.register_effect(:Battler, {
-    :id => :DryHeat,
-    :real_name => "Dried Out",
-    :info_displayed => false,
-    :apply_proc => proc do |battle, battler, _value|
-        battle.pbDisplay(_INTL("{1} was dried out!", battler.pbThis))
-        battle.scene.pbRefresh
-    end,
 })
 
 GameData::BattleEffect.register_effect(:Battler, {
@@ -1329,7 +1304,7 @@ GameData::BattleEffect.register_effect(:Battler, {
     :apply_proc => proc do |_battle, battler, _value|
         battler.refreshDataBox
     end,
-    :disable_proc => proc do |_battle, battler|
+    :disable_proc => proc do |battle, battler|
         battler.refreshDataBox
     end,
 })

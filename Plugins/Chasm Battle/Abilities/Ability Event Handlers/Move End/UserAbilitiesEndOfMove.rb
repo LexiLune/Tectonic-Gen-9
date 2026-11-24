@@ -324,6 +324,26 @@ BattleHandlers::UserAbilityEndOfMove.add(:SLEIGHTOFHAND,
   }
 )
 
+BattleHandlers::UserAbilityEndOfMove.add(:FRAZZLE,
+  proc { |ability, user, targets, move, battle|
+      next if move.id == :STRUGGLE
+
+      type = move.calcType
+      next unless user.pbHasType?(type)
+      battle.pbShowAbilitySplash(user, ability)
+      if user.effectActive?(:LostType)
+          user.effects[:LostType].push(type)
+      else
+          user.applyEffect(:LostType, [type])
+      end
+      typeName = GameData::Type.get(type).name
+      battle.pbShowAbilitySplash(user, ability)
+      battle.pbDisplay(_INTL("{1} lost its {2} type!", user.pbThis, typeName))
+      battle.scene.pbRefresh
+      battle.pbHideAbilitySplash(user)
+  }
+)
+
 BattleHandlers::UserAbilityEndOfMove.add(:SPARESCALES,
   proc { |ability, user, _targets, move, _battle, _switchedBattlers|
       next unless move.calcTypes.intersect?(%i[GRASS GROUND STEEL])

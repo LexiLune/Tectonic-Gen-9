@@ -966,6 +966,20 @@ GameData::BattleEffect.register_effect(:Side, {
 })
 
 GameData::BattleEffect.register_effect(:Side, {
+    :id => :DevolvedAllBattle,
+    :real_name => "Devolved All Battle",
+    :info_displayed => false,
+    :type => :Hash,
+    :entry_proc => proc do |battle, battlerIndex, side, battler, value|
+        echoln(value.to_s)
+        if value.key?(battler.pokemonIndex)
+            deEvo = value[battler.pokemonIndex]
+            battler.deEvolveSpecies
+        end
+    end,
+})
+
+GameData::BattleEffect.register_effect(:Side, {
     :id => :PayDay,
     :real_name => "Money Dropped",
     :type => :Integer,

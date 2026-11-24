@@ -253,8 +253,12 @@ end
 class PokeBattle_Move_RemoveTargetWaterType < PokeBattle_Move
     def pbEffectBeforeDealingDamage(user, target)
         if target.pbHasType?(:WATER)
-            target.applyEffect(:DryHeat)
-            target.damageState.typeMod = pbCalcTypeMod(@calcTypes, user, target)
+          if user.effectActive?(:LostType)
+              user.effects[:LostType].push(:WATER)
+          else
+              user.applyEffect(:LostType, [:WATER])
+          end
+          target.damageState.typeMod = pbCalcTypeMod(@calcTypes, user, target)
         end
     end
 end

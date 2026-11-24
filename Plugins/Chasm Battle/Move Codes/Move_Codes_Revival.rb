@@ -57,6 +57,31 @@ class PokeBattle_Move_RevivePartyMemberTo1HP < PokeBattle_PartyMemberEffectMove
 end
 
 #===============================================================================
+# Hits twice. If the first hit KOs the target, a random fainted ally is revived
+# with 1 HP in place of the second hit. (Pawmot's Double Shock)
+#===============================================================================
+class PokeBattle_Move_HitsTwiceOrRevivesRandomAlly < PokeBattle_Move
+    def multiHitMove?; return true; end
+    def pbNumHits(_user, _targets, _checkingForAI = false); return 2; end
+
+
+    def pbEndOfMoveUsageEffect(user, targets, numHits, switchedBattlers)
+        return if user.fainted? || numHits == 0 || numHits == 2
+        return unless targets[0].fainted?
+        viableAllies = []
+        @battle.pbParty(user.index).each do |pkmn|
+            viableAllies.push(pkmn) if pkmn.fainted?
+        end
+        if viableAllies.length > 0
+            selectedPokemon = viableAllies.sample
+            selectedPokemon.heal
+            selectedPokemon.hp = 1
+            @battle.pbDisplay(_INTL("The leftover charge revived {1} with 1 HP!", selectedPokemon.name))
+        end
+    end
+end
+
+#===============================================================================
 # Revives a fainted party member back to 50% HP, then switch them in and boost their stats. (Golden Rebirth)
 #===============================================================================
 class PokeBattle_Move_RevivePartyMemberTo50HPThenSwitch < PokeBattle_Move

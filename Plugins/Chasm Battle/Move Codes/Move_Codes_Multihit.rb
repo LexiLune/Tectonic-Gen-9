@@ -96,6 +96,7 @@ def getRandomMultihitNumber(user, _targets)
         numHits = hitChances.sample
     end
     numHits += 1 if user.hasActiveAbility?(:REPETITION)
+    numHits += 2 if user.hasActiveAbility?(:ALLTOGETHERNOW)
     return numHits
 end
 
@@ -108,6 +109,7 @@ def getRandomMultihitNumberAI(user, _targets)
         score = 19.0 / 6.0 # Average
     end
     score += 1 if user.hasActiveAbilityAI?(:REPETITION)
+    score += 2 if user.hasActiveAbilityAI?(:ALLTOGETHERNOW)
     return score
 end
 
@@ -138,6 +140,7 @@ def getRandomFickleUnionNumber(user, _targets)
         numHits = hitChances.sample
     end
     numHits += 1 if user.hasActiveAbility?(:REPETITION)
+    numHits += 2 if user.hasActiveAbility?(:ALLTOGETHERNOW)
     return numHits
 end
 
@@ -148,6 +151,7 @@ def getRandomFickleUnionNumberAI(user, _targets)
         score = 4 # Average
     end
     score += 1 if user.hasActiveAbilityAI?(:REPETITION)
+    score += 2 if user.hasActiveAbilityAI?(:ALLTOGETHERNOW)
     return score
 end
 

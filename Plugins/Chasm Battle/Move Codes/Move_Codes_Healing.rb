@@ -54,6 +54,33 @@ class PokeBattle_Move_HealUserHalfOfTotalHPSetupRainbow < PokeBattle_HalfHealing
 end
 
 #===============================================================================
+# User is healed for 50% of their max HP. Any excess healing is dealt as damage to
+# all other battlers. (Maushold's Population Bomb)
+#===============================================================================
+class PokeBattle_Move_HealUserHalfOfTotalHPDamageAllOthers < PokeBattle_Move
+    def healingMove?; return true; end
+
+    def pbEffectGeneral(user)
+        excessHealing = 0 > user.hp - (user.totalhp / 2.0).round ? 0 : user.hp - (user.totalhp / 2.0).round
+        user.applyFractionalHealing(1.0 / 2.0, user: user)
+        if user.hp == user.totalhp
+            @battle.eachBattler do |b|
+                next if b.index == user.index
+                next if b.damageState.unaffected
+                b.pbReduceHP(excessHealing, false)
+                @battle.pbDisplay(_INTL("Overpopulation presses in on {1}!", b.pbThis))
+                b.pbItemHPHealCheck
+                b.pbFaint if b.fainted?
+            end
+        end
+    end
+    def getEffectScore(user, _target)
+        score += (user.hp - (user.totalhp / 2.0).round) * 20
+        return score
+    end
+end
+
+#===============================================================================
 # Battler in user's position is healed by 1/2 of its max HP, at the end of the
 # next round. (Wish)
 #===============================================================================

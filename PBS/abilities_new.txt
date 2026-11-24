@@ -47,10 +47,19 @@ Description = HP-fraction-based damage effects deal 35% more damage to opponents
 Name = All-Consuming
 Description = When another Pokémon faints, consumes their item, ability, and stat steps.
 #-------------------------------
+[ALLOUT]
+Name = All Out
+Description = When HP drops below half, enters Showdown Mode until it switches out. Ability becomes Hustle.
+Flags = Immutable
+#-------------------------------
 [ALLTHATGLITTERS]
 Name = All That Glitters
 Description = Can hold two different items, if both are Gems.
 Flags = MultipleItems
+#-------------------------------
+[ALLTOGETHERNOW]
+Name = All Together Now
+Description = All attacks hit 4 times for 30% damage. Multi-hit moves hit two extra times instead.
 #-------------------------------
 [AMBUSHPREDATOR]
 Name = Ambush Predator
@@ -686,6 +695,10 @@ Name = Fashionable
 Description = Can hold two different items, if one is clothing and the other is not.
 Flags = MultipleItems
 #-------------------------------
+[FASTIDIOUS]
+Name = Fastidious
+Description = Status moves have -1 priority, but heal for 1/12 max HP after use. This can overheal.
+#-------------------------------
 [FATCHANCE]
 Name = Fat Chance
 Description = Raises all of its stats whenever it knocks out a Pokémon with a critical hit.
@@ -818,6 +831,10 @@ Description = Foretelling moves also hit for half power on the turn they are use
 Name = Fortified
 Description = Take 30% less damage from attacks on turns when it hasn't moved yet.
 #-------------------------------
+[FRAZZLE]
+Name = Frazzle
+Description = Boosts the power of same-type attacks by 40%, but loses the type after using them.
+#-------------------------------
 [FREERIDE]
 Name = Free Ride
 Description = Raises other allies' Speed by two steps upon entry.
@@ -825,6 +842,11 @@ Description = Raises other allies' Speed by two steps upon entry.
 [FREESTYLE]
 Name = Freestyle
 Description = This Pokémon changes type to that of the move it's about to use. However, it's 20% less accurate.
+#-------------------------------
+[FRESHSTART]
+Name = Fresh Start
+Description = Devolves into Tandemaus for the rest of the battle instead of fainting. Ability becomes Friend Guard.
+Flags = Immutable
 #-------------------------------
 [FRIENDTOALL]
 Name = Friend to All
@@ -1543,6 +1565,10 @@ Description = Deals no damage to a target while they are using a status move.
 Name = No Hope
 Description = Traps foes when they are below half health.
 #-------------------------------
+[NOWYOUSEEME]
+Name = Now You See Me...
+Description = Switches out after using a status move.
+#-------------------------------
 [NUMBINGTOUCH]
 Name = Numbing Touch
 Description = Physical moves have a 30% chance to numb targets.
@@ -1579,6 +1605,10 @@ Description = After knocking out any Pokémon, raises its Attack and Speed.
 [OVERCHARGE]
 Name = Overcharge
 Description = After knocking out any Pokémon, raises its Sp. Atk and Speed.
+#-------------------------------
+[OVEREXERTION]
+Name = Overexertion
+Description = Doubles Speed, but lowers it by 3 steps at the end of each turn.
 #-------------------------------
 [OVERFLOWINGHEART]
 Name = Overflowing Heart
@@ -1802,6 +1832,10 @@ Description = Protects other allies, reducing their move damage taken by 33% whi
 [RAINBOWTRAIL]
 Name = Rainbow Trail
 Description = Loses its Fire type. Whenever it uses a move, it gains that move's type.
+#-------------------------------
+[RAINDANCER]
+Name = Rain Dancer
+Description = This Pokémon's Attack and Speed are increased by 30% during a rainstorm.
 #-------------------------------
 [RAINPRISM]
 Name = Rain Prism
@@ -2085,6 +2119,10 @@ Description = When this Pokémon charges and becomes hidden, it lowers the Attac
 Name = Sickening
 Description = Special moves against it lower the attacker's Speed and Sp. Atk.
 #-------------------------------
+[SICKLYSWEET]
+Name = Sickly-Sweet
+Description = At the end of each turn, lowers other dizzied Pokémon's Attack and Sp. Atk by two steps.
+#-------------------------------
 [SIGNALJAM]
 Name = Signal Jam
 Description = This Pokémon and other battlers don't benefit from same-type attacking bonus.
@@ -2122,6 +2160,10 @@ Description = Whenever a foe fails or misses, they take 1/8th HP damage.
 Name = Sleetshaker
 Description = Boosts Attack by 30% in hail.
 Flags = HailSynergy
+#-------------------------------
+[SLEIGHTOFHAND]
+Name = Sleight of Hand
+Description = After using a move, changes one of its types to match it. You can choose which type changes.
 #-------------------------------
 [SLINKY]
 Name = Slinky
@@ -2180,6 +2222,10 @@ Flags = MoonglowSynergy
 [SOPPING]
 Name = Sopping
 Description = Boosts Defense by 20%. When this Pokémon takes its second physical hit from the same attacker, they become waterlogged.
+#-------------------------------
+[SOULSONG]
+Name = Soul Song
+Description = Sound moves target the lower of Defense and Sp. Def, and drain 33% of damage dealt.
 #-------------------------------
 [SPACEINTERLOPER]
 Name = Space Interloper
@@ -2318,6 +2364,14 @@ Flags = MoonglowSynergy
 Name = Stylish
 Description = This Pokémon benefits twice as much from style points.
 Flags = Immutable
+#-------------------------------
+[STYLISHSTEPS]
+Name = Stylish Steps
+Description = Using a dance move boosts the next kick move's power by 50%, and vice versa.
+#-------------------------------
+[SUBTERFUGE]
+Name = Subterfuge
+Description = This Pokémon's moves have +1 priority against single targets with decreased stats.
 #-------------------------------
 [SUBZERO]
 Name = Sub Zero
@@ -2629,6 +2683,10 @@ Flags = RainstormSynergy
 Name = Weathered
 Description = Immune to weather downsides, and takes 20% less damage from attacks during weather.
 Flags = AllWeatherSynergy
+#-------------------------------
+[WEBWEAVER]
+Name = Web Weaver
+Description = Opponents who switch in have their Speed lowered by 3 steps.
 #-------------------------------
 [WELLROUNDED]
 Name = Well Rounded

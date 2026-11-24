@@ -35,13 +35,11 @@ class PokeBattle_Battler
             next if ret.include?(extraPkmnType)
             ret.push(extraPkmnType)
         end
-        # Burn Up erases the Fire-type.
-        ret.delete(:FIRE) if effectActive?(:BurnUp)
-        # Sublimate erases the Ice-type.
-        ret.delete(:ICE) if effectActive?(:Sublimate)
-        # Dry Heat erases the Water-type.
-        ret.delete(:WATER) if effectActive?(:DryHeat)
-        # Roost erases the Flying-type.
+        # Unified type-loss effects (Burn Up, Sublimate, etc) to work with Pawmot's Frazzle
+        if effectActive?(:LostType)
+            ret.delete(@effects[:LostType])
+        end
+        # Roost stays in its own category, since it expires at end of turn
         ret.delete(:FLYING) if effectActive?(:Roost)
         # Rainbow Trails erases the Fire-type.
         ret.delete(:FIRE) if effectActive?(:RainbowTrailEntry)

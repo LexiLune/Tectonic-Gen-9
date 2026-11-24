@@ -32,6 +32,27 @@ class PokeBattle_Move_FlinchTargetFailsIfNotUserFirstTurn < PokeBattle_FlinchMov
 end
 
 #===============================================================================
+# Flinches the target if they have any non-volatile status condition.
+# (Electivire's Amp Driver)
+#===============================================================================
+class PokeBattle_Move_FlinchesIfTargetStatused < PokeBattle_Move
+    def flinchingMove?; return true; end
+
+    def pbAdditionalEffect(user, target)
+        return if target.damageState.substitute
+        return unless target.pbHasAnyStatus?
+
+        target.pbFlinch
+    end
+
+    def getTargetAffectingEffectScore(user, target)
+        return unless target.pbHasAnyStatus?
+        score = getFlinchingEffectScore(100, user, target, self)
+        return score
+    end
+end
+
+#===============================================================================
 # Lowers the target's Speed. Flinch chance. (Split the Sky)
 #===============================================================================
 class PokeBattle_Move_FlinchTargetLowerTargetSpd1 < PokeBattle_Move

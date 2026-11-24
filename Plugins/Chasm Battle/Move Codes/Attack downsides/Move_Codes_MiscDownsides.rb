@@ -11,7 +11,11 @@ class PokeBattle_Move_UserLosesFireType < PokeBattle_Move
     end
 
     def pbEffectAfterAllHits(user, _target)
-        user.applyEffect(:BurnUp)
+        if user.effectActive?(:LostType)
+            user.effects[:LostType].push(:ICE)
+        else
+            user.applyEffect(:LostType, [:ICE])
+        end
     end
 
     def getEffectScore(_user, _target)
@@ -32,7 +36,11 @@ class PokeBattle_Move_UserLosesIceType < PokeBattle_Move
     end
 
     def pbEffectAfterAllHits(user, _target)
-        user.applyEffect(:Sublimate)
+        if user.effectActive?(:LostType)
+            user.effects[:LostType].push(:ICE)
+        else
+            user.applyEffect(:LostType, [:ICE])
+        end
     end
 
     def getEffectScore(_user, _target)

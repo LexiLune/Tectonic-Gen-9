@@ -268,7 +268,7 @@ end
 #===============================================================================
 class PokeBattle_Move_DoubleDamageTargetVolatileStatus < PokeBattle_Move
     def pbBaseDamage(baseDmg, _user, target)
-        if target.effectActive?(:Jinxed) || target.effectActive?(:Fracture) || target.effectActive?(:Blindness) || target.effectActive?(:Torment) || target.effectActive?(:Taunt) || target.effectActive?(:Disable) || target.effectActive?(:Barred) || target.effectActive?(:Encore) || target.effectActive?(:HealBlock) || target.effectActive?(:MeanLook) || target.effectActive?(:Trapping) || target.effectActive?(:Substitute) || target.effectActive?(:Stockpile) || target.effectActive?(:AquaRing) || target.effectActive?(:EnergyCharge) || target.effectActive?(:Transform) || target.effectActive?(:PerishSong) || target.effectActive?(:Roost) || target.effectActive?(:Shrinking) || target.effectActive?(:SugarRush)
+        if target.effectActive?(:Jinxed) || target.effectActive?(:Fracture) || target.effectActive?(:Blindness) || target.effectActive?(:Torment) || target.effectActive?(:Taunt) || target.effectActive?(:Disable) || target.effectActive?(:Barred) || target.effectActive?(:Encore) || target.effectActive?(:HealBlock) || target.effectActive?(:MeanLook) || target.effectActive?(:Trapping) || target.effectActive?(:Substitute) || target.effectActive?(:Stockpile) || target.effectActive?(:AquaRing) || target.effectActive?(:EnergyCharge) || target.effectActive?(:Transform) || target.effectActive?(:PerishSong) || target.effectActive?(:LostType) || target.effectActive?(:Shrinking) || target.effectActive?(:SugarRush)
           baseDmg *= 2
         end
         return baseDmg

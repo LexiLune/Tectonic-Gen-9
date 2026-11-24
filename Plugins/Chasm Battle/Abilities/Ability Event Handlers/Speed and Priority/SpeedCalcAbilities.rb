@@ -10,6 +10,12 @@ BattleHandlers::SpeedCalcAbility.add(:HYPERSPEED,
   }
 )
 
+BattleHandlers::SpeedCalcAbility.add(:OVEREXERTION,
+  proc { |ability, battler, mult|
+      next mult * 2.0
+  }
+)
+
 BattleHandlers::SpeedCalcAbility.add(:SANDRUSH,
   proc { |ability, battler, mult|
       next mult * 2 if battler.battle.sandy?

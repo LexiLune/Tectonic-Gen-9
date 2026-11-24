@@ -444,6 +444,18 @@ FunctionCode = SleepUserLowerDefSpdef4
 Flags = CanProtect,CanMagicCoat
 Description = The user suddenly falls asleep for one turn, making enemies drop their guard, lowering their Defense and Sp. Def by four steps.
 #-------------------------------
+[POPULATIONBOMB]
+Name = Population Bomb
+Type = NORMAL
+Category = Status
+Accuracy = 0
+TotalPP = 5
+Target = User
+FunctionCode = HealUserHalfOfTotalHPDamageAllOthers
+Flags = CanSnatch
+Description = The user heals for 50% of its max HP. All other battlers take damage equal to the excess healing.
+Animation = RECOVER
+#-------------------------------
 [PRANK]
 Name = Prank
 Type = NORMAL
@@ -1617,6 +1629,18 @@ Target = User
 FunctionCode = RaiseUserSpDef5
 Flags = CanSnatch
 Description = The user partially dissolves, raising its Sp. Def by five steps.
+#-------------------------------
+[ENTRANCINGAROMA]
+Name = Entrancing Aroma
+Type = POISON
+Category = Status
+Accuracy = 0
+TotalPP = 5
+Target = NearOther
+FunctionCode = TrapAndDizzyTarget
+Flags = CanProtect,CanMagicCoat
+Description = Befuddles the target with an overpowering aroma, trapping and dizzying them.
+Animation = AROMATICMIST
 #-------------------------------
 [EXSANGUINATE]
 Name = Exsanguinate
@@ -2886,6 +2910,19 @@ Flags = CanProtect,Sound
 EffectChance = 40
 Description = The user vibrates its wings to make a damaging sound wave. It has a 40% chance to lower Sp. Def.
 Animation = BUGBUZZ
+#-------------------------------
+[ENMESH]
+Name = Enmesh
+Type = BUG
+Category = Special
+Power = 70
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = DoubleDamageTargetVolatileStatus
+Flags = CanProtect
+Description = Snags the target in strands of web and strikes. Doubles in power if they have a volatile status condition.
+Animation = STRINGSHOT
 #-------------------------------
 [ENVENOM]
 Name = Envenom
@@ -4676,6 +4713,19 @@ Flags = CanProtect
 Description = The user launches volcanic debris, dealing damage and setting a hazard layer of burning spikes around the target.
 Animation = FLAMEBURST
 #-------------------------------
+[TORCHSONG]
+Name = Torch Song
+Type = FIRE
+Category = Special
+Power = 100
+Accuracy = 100
+TotalPP = 10
+Target = AllNearFoes
+FunctionCode = RaiseEveryoneSpeed
+Flags = CanProtect,Sound
+Description = Damages both opponents, then raises all battlers' Sp. Atk.
+Animation = HEATWAVE
+#-------------------------------
 [UPINFLAMES]
 Name = Up In Flames
 Type = FIRE
@@ -5126,6 +5176,20 @@ FunctionCode = HealUserHalfOfTotalHPStartHealUserEachTurn
 Flags = CanSnatch
 Description = The user rests in a riverbed, restoring its HP by half of max, and forming an Aqua Ring around themselves, healing 10% HP per turn.
 Animation = REST
+#-------------------------------
+[SAMBA]
+Name = Samba
+Type = WATER
+Category = Physical
+Power = 60
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+Priority = 1
+FunctionCode = RedirectAllMovesToUser
+Flags = CanProtect,Dance
+Description = Performs a stylish  aquatic battle-dance, redirecting foes' moves towards the user for the rest of the turn.
+Animation = AQUAJET
 #-------------------------------
 [SEABORNESACRAMENT]
 Name = Seaborne Sacrament
@@ -5811,6 +5875,20 @@ Flags = CanProtect,ForceSignature
 Description = Guaranteed to critical hit if the target has no stat step changes. The target is surged forward, raising all its stats.
 Animation = VOLTTACKLE
 #-------------------------------
+[AMPDRIVER]
+Name = Amp Driver
+Type = ELECTRIC
+Category = Physical
+Power = 85
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = FlinchesIfTargetStatused
+Flags = CanProtect
+EffectChance = 100
+Description = Jabs the target and unleashes an explosive burst of electricity. Flinches the target if they have a non-volatile status condition.
+Animation = VOLTTACKLE
+#-------------------------------
 [AMPUP]
 Name = Amp Up
 Type = ELECTRIC
@@ -5911,6 +5989,19 @@ FunctionCode = Rampage
 Flags = CanProtect
 Description = The user breaks down all insulation to send a barrage of electricity to rampage for two turns.
 Animation = GIGAVOLTHAVOC
+#-------------------------------
+[DOUBLESHOCK]
+Name = Double Shock
+Type = ELECTRIC
+Category = Physical
+Power = 50
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = HitsTwiceOrRevivesRandomAlly
+Flags = CanProtect,Punch
+Description = Hits twice. If the first hit KOs the target, the second revives a random fainted ally with 1HP instead.
+Animation = THUNDERPUNCH
 #-------------------------------
 [ELECTROCUTE]
 Name = Electrocute
@@ -7894,6 +7985,19 @@ Flags = CanProtect
 Description = Darkness rolls over the field, damaging all other Pokémon and setting Grey Mist for five turns.
 Animation = GREYMIST
 #-------------------------------
+[AXEKICK]
+Name = Axe Kick
+Type = DARK
+Category = Physical
+Power = 95
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = AlwaysCriticalHitRecoilThirdOfDamageDealt
+Flags = CanProtect,Kick
+Description = Delivers a vicious, reckless kick that always results in a critical hit. The user takes 33% recoil.
+Animation = JUMPKICK
+#-------------------------------
 [BACKHAND]
 Name = Backhand
 Type = DARK
@@ -8072,6 +8176,19 @@ Target = NearOther
 FunctionCode = RaiseUserSpAtk5IfTargetFaints
 Flags = CanProtect
 Description = When the user knocks out a target with this move, this raises the user's Sp. Atk by five steps.
+#-------------------------------
+[FLOWERTRICK]
+Name = Flower Trick
+Type = DARK
+Category = Status
+Accuracy = 0
+TotalPP = 5
+Target = NearOther
+Priority = 1
+FunctionCode = JinxSuckerBackhand
+Flags = CanProtect,CanMagicCoat
+Description = Jinxes a target. If they intend to attack this turn, they also hurt themself in confusion. Only works on the user's first turn.
+Animation = FEINTATTACK
 #-------------------------------
 [GLEEFULGRASP]
 Name = Gleeful Grasp

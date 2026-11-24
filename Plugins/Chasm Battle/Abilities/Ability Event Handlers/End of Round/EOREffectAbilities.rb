@@ -21,6 +21,14 @@ BattleHandlers::EOREffectAbility.add(:SPEEDBOOST,
   }
 )
 
+BattleHandlers::EOREffectAbility.add(:OVEREXERTION,
+  proc { |ability, battler, _battle|
+      # A Pokémon's turnCount is 0 if it became active after the beginning of a
+      # round
+      battler.tryLowerStat(:SPEED, battler, ability: ability, increment: 3) if battler.turnCount > 0
+  }
+)
+
 BattleHandlers::EOREffectAbility.add(:SPINTENSITY,
   proc { |ability, battler, _battle|
       # A Pokémon's turnCount is 0 if it became active after the beginning of a

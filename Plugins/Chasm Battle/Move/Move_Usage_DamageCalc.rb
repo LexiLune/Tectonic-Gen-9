@@ -370,6 +370,9 @@ class PokeBattle_Move
             if stabBoostingAbility
                 stab *= 4.0 / 3.0
                 user.aiLearnsAbility(stabBoostingAbility)
+            elsif user.shouldAbilityApply?(:FRAZZLE, checkingForAI)
+                stab *= 10.0 / 4.0
+                user.aiLearnsAbility(:FRAZZLE)
             elsif user.shouldAbilityApply?(:ULTRAADAPTED, checkingForAI)
                 stab *= 3.0 / 2.0
                 user.aiLearnsAbility(:ULTRAADAPTED)
@@ -508,6 +511,9 @@ class PokeBattle_Move
             if user.hasActiveAbility?(:PARENTALBOND) || (user.hasActiveAbility?(:STRIKETWICE) && @battle.rainy?)
                 multipliers[:base_damage_multiplier] *= 1.25
             end
+            if user.hasActiveAbility?(:ALLTOGETHERNOW)
+                multipliers[:base_damage_multiplier] *= 1.2
+            end
             if user.hasActiveAbility?(:DIFFRACTION) && user.protectedByScreen?
                 multipliers[:base_damage_multiplier] *= (4.0 / 3.0)
             end
@@ -552,6 +558,10 @@ class PokeBattle_Move
             # Snorer
             if user.effectActive?(:Snorer)
                 multipliers[:final_damage_multiplier] *= 0.50
+            end
+            # Maushold's All Together Now
+            if user.hasActiveAbility?(:ALLTOGETHERNOW)
+                multipliers[:base_damage_multiplier] *= (1.0 / 3.0)
             end
         end
 
