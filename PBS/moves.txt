@@ -5717,6 +5717,19 @@ FunctionCode = LowerTargetAtk3
 Flags = CanProtect,CanMagicCoat
 Description = The user stares with its baby-doll eyes, which lowers the target's Attack by three steps. Always goes first.
 #-------------------------------
+[CARAMELIZE]
+Name = Caramelize
+Type = FAIRY
+Category = Special
+Power = 70
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = BurnTargetOrLowerAtackSpeed
+Flags = CanProtect
+EffectChance = 100
+Description = Caramelizes the target, burning them. If they can't be burned, their Attack and Speed are lowered instead.
+#-------------------------------
 [CHARM]
 Name = Charm
 Type = FAIRY

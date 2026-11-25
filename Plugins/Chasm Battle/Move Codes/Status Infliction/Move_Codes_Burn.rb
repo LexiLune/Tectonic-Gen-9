@@ -134,3 +134,25 @@ class PokeBattle_Move_BurnAddFireType < PokeBattle_Move
         return score
     end
 end
+
+#===============================================================================
+# Burns the target, or lowers its Attack and Speed if it can't currently
+# be burned. (Dachsbun's Caramelize)
+#===============================================================================
+class PokeBattle_Move_BurnTargetOrLowerAtackSpeed < PokeBattle_Move
+
+    def pbAdditionalEffect(user, target)
+        if target.canBurn?(user, false, self)
+            target.applyBurn(user)
+        else
+            target.tryLowerStat(:ATTACK, user)
+            target.tryLowerStat(:SPEED, user)
+        end
+    end
+
+    def getTargetAffectingEffectScore(user, target)
+        score = getBurnEffectScore(user, target)
+        score += 60
+        return score
+    end
+end

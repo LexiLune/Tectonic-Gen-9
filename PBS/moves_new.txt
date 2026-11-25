@@ -433,6 +433,17 @@ Flags = CanProtect,Pulse
 Description = The user shoots a pulse of neutral particles at the target.
 Animation = STOREDPOWER
 #-------------------------------
+[PEACEOFFERING]
+Name = Peace Offering
+Type = NORMAL
+Category = Status
+Accuracy = 0
+TotalPP = 5
+Target = UserSide
+FunctionCode = SetSanctuarySwitchOutUser
+Description = The user offers up a temporary truce, setting Sanctuary for four turns, then switches out.
+Animation = LUCKYCHANT
+#-------------------------------
 [PLAYDEAD]
 Name = Play Dead
 Type = NORMAL
@@ -3723,8 +3734,8 @@ EffectChance = 50
 Description = The target is pestered by a giant tongue. This has a 50% chance to numb it.
 Animation = LICK
 #-------------------------------
-[UMBRAGE]
-Name = Umbrage
+[VEXATION]
+Name = Vexation
 Type = GHOST
 Category = Special
 Power = 60

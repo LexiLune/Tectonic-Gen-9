@@ -265,6 +265,21 @@ GameData::BattleEffect.register_effect(:Position, {
 })
 
 GameData::BattleEffect.register_effect(:Position, {
+    :id => :CaringEmbrace,
+    :real_name => "Caring Embrace",
+    :type => :PartyPosition,
+    :swaps_with_battlers => true,
+    :entry_proc => proc do |battle, _index, position, battler|
+        if battler.hp < battler.totalhp
+            sourceMaker = battle.pbThisEx(battler.index, position.effects[:CaringEmbrace])
+            battler.applyFractionalHealing(1.0 / 4.0)
+            battle.pbDisplay(_INTL("{1} was soothed by {2}'s embrace!", battler.pbThis(true), sourceMaker))
+        end
+        position.disableEffect(:CaringEmbrace)
+    end,
+})
+
+GameData::BattleEffect.register_effect(:Position, {
     :id => :Stormshards,
     :real_name => "Stormshards",
     :type => :Integer,

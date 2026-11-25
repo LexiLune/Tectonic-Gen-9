@@ -59,7 +59,7 @@ Flags = MultipleItems
 #-------------------------------
 [ALLTOGETHERNOW]
 Name = All Together Now
-Description = All attacks hit 4 times for 30% damage. Multi-hit moves hit two extra times instead.
+Description = All attacks hit four times for 30% damage. Multi-hit moves hit two extra times instead.
 #-------------------------------
 [AMBUSHPREDATOR]
 Name = Ambush Predator
@@ -300,6 +300,10 @@ Description = Prevents itself and allies from being poisoned, leeched, or numbed
 [CANIDCRUSHER]
 Name = Canid Crusher
 Description = On the first turn, its attacks fracture the target.
+#-------------------------------
+[CARINGEMBRACE]
+Name = Caring Embrace
+Description = Pokémon that swap in for this are healed for 25% of their max HP.
 #-------------------------------
 [CASHOUT]
 Name = Cash Out
@@ -1771,6 +1775,10 @@ Flags = Immutable,UnableByDefault,BattleEndReviver
 Name = Probe Weakness
 Description = Doubles this Pokémon's crit chance, if it lands a move that could crit but doesn't. Powers up critical hits by another 50%.
 #-------------------------------
+[PROLIFIC]
+Name = Prolific
+Description = This Pokémon's attacks are always critical against leeched targets.
+#-------------------------------
 [PROTECTIVEINSTINCT]
 Name = Protective Instinct
 Description = While this Pokémon has an ally that isn't fully evolved, both Pokémon take 33% less move damage.
@@ -2687,6 +2695,10 @@ Flags = AllWeatherSynergy
 [WEBWEAVER]
 Name = Web Weaver
 Description = Opponents who switch in have their Speed lowered by 3 steps.
+#-------------------------------
+[WELLBAKEDBODY]
+Name = Well-Baked Body
+Description = Takes 25% less move damage, but 50% more from bite and slice moves instead.
 #-------------------------------
 [WELLROUNDED]
 Name = Well Rounded

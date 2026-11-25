@@ -46,6 +46,12 @@ BattleHandlers::GuaranteedCriticalUserAbility.add(:STERN,
     }
 )
 
+BattleHandlers::GuaranteedCriticalUserAbility.add(:PROLIFIC,
+    proc { |_ability, _user, target, _battle, _move|
+        next true if target.leeched?
+    }
+)
+
 BattleHandlers::GuaranteedCriticalUserAbility.add(:STAYOFEXECUTION,
     proc { |_ability, _user, _target, _battle, move|
         next true if move.sliceMove?

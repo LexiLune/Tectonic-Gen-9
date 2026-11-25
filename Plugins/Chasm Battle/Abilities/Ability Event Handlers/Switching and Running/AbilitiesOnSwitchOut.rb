@@ -61,6 +61,13 @@ BattleHandlers::AbilityOnSwitchOut.add(:MAGMATRAIL,
   }
 )
 
+BattleHandlers::AbilityOnSwitchOut.add(:CARINGEMBRACE,
+  proc { |ability, battler, battle, endOfBattle|
+      next if endOfBattle
+      battler.position.applyEffect(:CaringEmbrace, battler.pokemonIndex)
+  }
+)
+
 BattleHandlers::AbilityOnSwitchOut.add(:INSECTCOLLECTOR,
   proc { |ability, battler, battle, _endOfBattle|
       next if battle.pbAllFainted?(battler.idxOpposingSide)

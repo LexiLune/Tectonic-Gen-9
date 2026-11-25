@@ -268,3 +268,28 @@ class PokeBattle_Move_PoisonTargetSwitchOutUserStatusMove < PokeBattle_Move
         return score
     end
 end
+
+#===============================================================================
+# Sets Sanctuary for 4 turns, then user switches out. (Arboliva's Peace Offering)
+#===============================================================================
+class PokeBattle_Move_SetSanctuarySwitchOutUser < PokeBattle_Move
+    def switchOutMove?; return true; end
+
+    def pbEffectGeneral(user)
+        return if damagingMove?
+        user.pbOwnSide.applyEffect(:Sanctuary, user.getScreenDuration(4))
+    end
+
+    def pbEndOfMoveUsageEffect(user, targets, numHits, switchedBattlers)
+        return if user.fainted?
+        return unless @battle.pbCanChooseNonActive?(user.index)
+        switchOutUser(user, switchedBattlers)
+    end
+
+    def getEffectScore(user, target)
+        score = 0
+        score += getSanctuaryEffectScore(user, nil, self)
+        score += getSwitchOutEffectScore(user) if @battle.pbCanChooseNonActive?(user.index)
+        return score
+    end
+end

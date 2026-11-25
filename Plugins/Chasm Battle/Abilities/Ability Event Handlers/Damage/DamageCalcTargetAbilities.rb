@@ -202,6 +202,17 @@ BattleHandlers::DamageCalcTargetAbility.add(:PINDOWN,
   }
 )
 
+BattleHandlers::DamageCalcTargetAbility.add(:WELLBAKEDBODY,
+  proc { |ability, user, target, move, mults, _baseDmg, _types, aiCheck|
+      if move.bitingMove? || move.sliceMove?
+        mults[:final_damage_multiplier] *= 3 / 2.0
+      else
+        mults[:final_damage_multiplier] *= 10 / 4.0
+      end
+      target.aiLearnsAbility(ability) unless aiCheck
+  }
+)
+
 BattleHandlers::DamageCalcTargetAbility.add(:FORTIFIED,
   proc { |ability, user, target, move, mults, _baseDmg, _types, aiCheck|
       if aiCheck

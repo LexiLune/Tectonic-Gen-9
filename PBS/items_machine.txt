@@ -1503,14 +1503,14 @@ FieldUse = TM
 Flags = SkipPocketMessage
 Move = SHADOWCLAW
 #-------------------------------
-[TMUMBRAGE]
+[TMVEXATION]
 Name = Unnamed
 NamePlural = Unnamed
 Pocket = 5
 Price = 1500
 FieldUse = TM
 Flags = SkipPocketMessage
-Move = UMBRAGE
+Move = VEXATION
 #-------------------------------
 [TMHYDRASTRIKE]
 Name = Unnamed
