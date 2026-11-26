@@ -730,7 +730,7 @@ module Recoilable
     def pbEffectAfterAllHits(user, target)
         return if target.damageState.unaffected
         recoilDamage = pbRecoilDamage(user, target)
-        user.applyRecoilDamage(recoilDamage, false, true)
+        user.applyRecoilDamage(recoilDamage, target, false, true)
     end
 
     def getDamageBasedEffectScore(user, _target, damage)

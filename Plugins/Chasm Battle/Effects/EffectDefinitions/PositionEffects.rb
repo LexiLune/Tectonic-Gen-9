@@ -213,7 +213,7 @@ GameData::BattleEffect.register_effect(:Position, {
     :entry_proc => proc do |battle, _index, position, battler|
         cushionAssisted = battle.pbThisEx(battler.index, position.effects[:Kickback])
         battle.pbDisplay(_INTL("{1}'s cushions the blow for {2}!", battler.pbThis(true), cushionAssisted))
-        battler.applyRecoilDamage(position.effects[:KickbackAmount], true, false, nil, true)
+        battler.applyRecoilDamage(position.effects[:KickbackAmount], battler, true, false, nil, true)
         position.disableEffect(:Kickback)
     end,
     :sub_effects => [:KickbackAmount],

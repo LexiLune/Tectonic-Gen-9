@@ -583,21 +583,21 @@ class PokeBattle_Battler
                 if targetBattler.effectActive?(:EmpoweredDestinyBond)
                     recoilDamage = targetBattler.damageState.totalHPLost / 3.0
                     recoilMessage = _INTL("{1}'s destiny is bonded with {2}!", user.pbThis, targetBattler.pbThis(true))
-                    user.applyRecoilDamage(recoilDamage, false, true, recoilMessage)
+                    user.applyRecoilDamage(recoilDamage, targetBattler, false, true, recoilMessage)
                 end
 
                 # Severe burn
                 if user.burned? && user.getStatusCount(:BURN) > 0
                     recoilDamage = targetBattler.damageState.totalHPLost / 3.0
                     recoilMessage = _INTL("{1} cringes from their severe burn!", user.pbThis)
-                    user.applyRecoilDamage(recoilDamage, false, true, recoilMessage)
+                    user.applyRecoilDamage(recoilDamage, targetBattler, false, true, recoilMessage)
                 end
 
                 # Summer Festivals
                 next unless user.pbOwnSide.effectActive?(:SummerFestivalsEnd)
                 recoilDamage = targetBattler.damageState.totalHPLost / 4.0
                 recoilMessage = _INTL("{1} got too rowdy!", user.pbThis)
-                user.applyRecoilDamage(recoilDamage, false, true, recoilMessage)
+                user.applyRecoilDamage(recoilDamage, targetBattler, false, true, recoilMessage)
             end
 
             # Curses about move usage

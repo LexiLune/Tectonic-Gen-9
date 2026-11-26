@@ -645,6 +645,19 @@ Flags = CanProtect,CanMagicCoat
 Description = The user smirks with confidence. The Sp. Def of nearby enemies is lowered by two steps.
 Animation = SCARYFACE
 #-------------------------------
+[SQUABBLE]
+Name = Squabble
+Type = NORMAL
+Category = Physical
+Power = 85
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = StealsAndConsumesItem
+Flags = CanProtect
+Description = Crashes into the target and steals their held item. If the stolen item is consumable, it activates immediately (if possible).
+Animation = BODYSLAM
+#-------------------------------
 [STELLARATE]
 Name = Stellarate
 Type = NORMAL
@@ -2664,6 +2677,18 @@ FunctionCode = SwitchOutTargetIfMisses
 Flags = CanProtect
 Description = If this move misses, the target is forced to switch out. Always goes last.
 Animation = SMACKDOWN
+#-------------------------------
+[SALTCURE]
+Name = Salt Cure
+Type = ROCK
+Category = Status
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = SaltCureTarget
+Flags = CanProtect,CanMagicCoat
+Description = Applies salt cure to the target until they switch out, damaging or healing them for 10% max HP each tun. Rock-types are immune.
+Animation = SANDATTACK
 #-------------------------------
 [SHATTEREDLIGHT]
 Name = Shattered Light

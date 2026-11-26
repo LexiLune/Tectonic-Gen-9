@@ -755,6 +755,18 @@ BattleHandlers::TargetAbilityOnHit.add(:PERISHBODY,
     }
 )
 
+BattleHandlers::TargetAbilityOnHit.add(:CALCIFY,
+    proc { |ability, user, target, move, battle, aiCheck, aiNumHits|
+        next unless move.specialMove?(user)
+        if aiCheck
+            next -10 * aiNumHits
+        end
+        battle.pbShowAbilitySplash(target, ability)
+        user.applyEffect(:Fracture, DEFAULT_FRACTURE_DURATION)
+        battle.pbHideAbilitySplash(target)
+    }
+)
+
 #########################################
 # Force of Nature Therian abilities
 #########################################

@@ -24,3 +24,19 @@ BattleHandlers::StatusCureAbility.add(:MINDLESS,
       end
   }
 )
+
+BattleHandlers::StatusCureAbility.add(:PURIFYINGSALT,
+  proc { |ability, battler|
+      battle = battler.battle
+
+      activate = battler.burned? || battler.frostbitten? || battler.numbed? || battler.waterlogged? || battler.poisoned? || battler.dizzy?
+
+      if activate
+          battle.pbShowAbilitySplash(battler, ability)
+          battler.pbCureStatus
+          healingMessage = _INTL("{1}'s healing salt cured its status condition.", battler.pbThis)
+          battler.applyFractionalHealing(1.0 / 8.0, ability: ability, customMessage: healingMessage)
+          battle.pbHideAbilitySplash(battler)
+      end
+  }
+)

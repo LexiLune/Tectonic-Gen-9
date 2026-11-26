@@ -29,6 +29,30 @@ BattleHandlers::UserAbilityStartOfMove.add(:REFRACTIVE,
   }
 )
 
+BattleHandlers::UserAbilityStartOfMove.add(:MAKEASCENE,
+  proc { |ability, user, _targets, move, battle|
+      moveType = move.calcType
+      next if user.type2 == moveType
+      next unless move.recoilMove?
+      user.showMyAbilitySplash(ability)
+      typeName = GameData::Type.get(moveType).name
+      user.type2 = moveType
+      case moveType
+      when :WATER, :ICE, :POISON, :PSYCHIC, :GHOST, :DRAGON, :DARK
+        user.pbChangeForm(1, _INTL("{1} gained the {2} type!", user.pbThis, typeName))
+      when  :FIRE, :ELECTRIC, :FIGHTING, :GROUND, :ROCK
+        user.pbChangeForm(2, _INTL("{1} gained the {2} type!", user.pbThis, typeName))
+      when :GRASS, :BUG
+        user.pbChangeForm(3, _INTL("{1} gained the {2} type!", user.pbThis, typeName))
+      else 
+        user.pbChangeForm(0, _INTL("{1} gained the {2} type!", user.pbThis, typeName))
+      end
+      battle.scene.pbRefresh
+      user.refreshDataBox
+      user.hideMyAbilitySplash
+  }
+)
+
 BattleHandlers::UserAbilityStartOfMove.add(:RAINBOWTRAIL,
   proc { |ability, user, _targets, move, battle|
       type = move.calcType

@@ -1797,6 +1797,42 @@ GameData::BattleEffect.register_effect(:Battler, {
 })
 
 GameData::BattleEffect.register_effect(:Battler, {
+    :id => :SaltCureHealing,
+    :real_name => "Salt Cure Healing",
+    :avatars_purge => true,
+    :apply_proc => proc do |battle, battler, _value|
+        battle.pbDisplay(_INTL("{1} is getting salt cured!", battler.pbThis))
+    end,
+    :eor_proc => proc do |_battle, battler, _value|
+        next unless battler.canHeal?
+        healMessage = _INTL("The refreshing salt restored {1}'s HP!", battler.pbThis(true))
+        battler.applyFractionalHealing(1.0 / 10.0, customMessage: healMessage)
+    end,
+    :stay_in_rating_proc => proc do |_battle, _battler, _value, stay_in_rating|
+        stay_in_rating += 15
+        next stay_in_rating
+    end
+})
+
+GameData::BattleEffect.register_effect(:Battler, {
+    :id => :SaltCureDamage,
+    :real_name => "Salt Cure Damage",
+    :avatars_purge => true,
+    :apply_proc => proc do |battle, battler, _value|
+        battle.pbDisplay(_INTL("{1} is getting salt cured!", battler.pbThis))
+    end,
+    :eor_proc => proc do |battle, battler, _value|
+        next unless battler.takesIndirectDamage?
+        battle.pbDisplay(_INTL("{1} is dried out by salt!", battler.pbThis))
+        battler.applyFractionalDamage(1.0 / 10.0)
+    end,
+    :stay_in_rating_proc => proc do |_battle, _battler, _value, stay_in_rating|
+        stay_in_rating -= 15
+        next stay_in_rating
+    end
+})
+
+GameData::BattleEffect.register_effect(:Battler, {
     :id => :Octolock,
     :real_name => "Octolocked",
     :trapping => true,

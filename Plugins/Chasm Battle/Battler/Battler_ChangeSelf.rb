@@ -122,11 +122,12 @@ class PokeBattle_Battler
         multiplier *= 0.25 if shouldAbilityApply?(:SANDRECONSTRUCTION, checkingForAI) && @battle.sandy?
         multiplier *= 0.5 if shouldAbilityApply?(:SUNCHASER, checkingForAI) && @battle.sunny?
         multiplier /= 2 if shouldAbilityApply?(:STONEMANE, checkingForAI)
+        multiplier /= 2 if shouldAbilityApply?(:MAKEASCENE, checkingForAI)
         multiplier *= 2 if shouldAbilityApply?(:LINEBACKER, checkingForAI)
         return multiplier
     end
 
-    def applyRecoilDamage(damage, showDamageAnimation = true, showMessage = true, recoilMessage = nil, cushionRecoil = false)
+    def applyRecoilDamage(damage, target, showDamageAnimation = true, showMessage = true, recoilMessage = nil, cushionRecoil = false)
         return unless takesRecoilDamage?
         # return if @battle.pbAllFainted?(@idxOpposingSide)
         damage = (damage * recoilDamageMult).round
@@ -159,9 +160,14 @@ class PokeBattle_Battler
         end
 
         oldHP = @hp
-        recoilMessage = _INTL("{1} is damaged by recoil!", pbThis) if recoilMessage.nil?
-        @battle.pbDisplay(recoilMessage) if showMessage
+        if hasActiveAbility?(:MAKEASCENE)
+            recoilMessage = _INTL("{1} splits the recoil with {2}!", pbThis, target.pbThis)
+            target.pbReduceHP(damage, showDamageAnimation)
+        else
+            recoilMessage = _INTL("{1} is damaged by recoil!", pbThis) if recoilMessage.nil?
+        end
         pbReduceHP(damage, showDamageAnimation)
+        @battle.pbDisplay(recoilMessage) if showMessage
 
         if !cushionRecoil
             pbHealthLossChecks(oldHP)

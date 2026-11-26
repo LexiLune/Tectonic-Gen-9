@@ -174,6 +174,8 @@ def battleKeywordsImportant
         "rapid spin",
         "aromatherapy",
         "fling",
+        "salt cure",
+        "salt cured",
     ]
 end
 

@@ -105,7 +105,7 @@ class PokeBattle_Move_CrashDamageIfFails < PokeBattle_Move
     def pbCrashDamage(user)
         recoilDamage = user.totalhp / 2.0
         recoilMessage = _INTL("{1} kept going and crashed!", user.pbThis)
-        user.applyRecoilDamage(recoilDamage, true, true, recoilMessage)
+        user.applyRecoilDamage(recoilDamage, user, true, true, recoilMessage)
     end
 
     def getEffectScore(_user, _target)
@@ -122,7 +122,7 @@ class PokeBattle_Move_DamageBelowHalfTakenAsRecoil < PokeBattle_Move
         return unless target.damageState.totalCalcedDamage < target.totalhp / 2
         recoilAmount = (target.totalhp / 2) - target.damageState.totalCalcedDamage
         recoilMessage = _INTL("{1} is hurt by leftover electricity!", user.pbThis)
-        user.applyRecoilDamage(recoilAmount, true, true, recoilMessage)
+        user.applyRecoilDamage(recoilAmount, user, true, true, recoilMessage)
     end
 
     def getDamageBasedEffectScore(user, target, damage)
@@ -233,7 +233,7 @@ class PokeBattle_Move_RecoilThirdOfDamageDealtButCantFaint < PokeBattle_RecoilMo
         return if target.damageState.unaffected
         recoilDamage = pbRecoilDamage(user, target)
         return if recoilDamage <= 0
-        user.applyRecoilDamage(recoilDamage, false, true)
+        user.applyRecoilDamage(recoilDamage, target, false, true)
     end
 end
 

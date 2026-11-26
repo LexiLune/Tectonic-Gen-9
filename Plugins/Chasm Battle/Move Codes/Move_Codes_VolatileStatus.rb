@@ -481,6 +481,35 @@ class PokeBattle_Move_CurseTarget < PokeBattle_Move
 end
 
 #===============================================================================
+# User applies salt cure to the target. (Garganacl's Salt Cure)
+#===============================================================================
+class PokeBattle_Move_SaltCureTarget < PokeBattle_Move
+    def pbOnStartUse(user, targets)
+        @healing = false
+        @healing = !user.opposes?(targets[0]) if targets.length > 0
+    end
+    
+    def pbFailsAgainstTarget?(_user, target, show_message)
+        return false if damagingMove?
+        if target.effectActive?(:SaltCureHealing) || target.effectActive?(:SaltCureDamage)
+            @battle.pbDisplay(_INTL("But {1} is already being salt cured!", target.pbThis(true))) if show_message
+            return true
+        elsif target.pbHasType?(:ROCK)
+            @battle.pbDisplay(_INTL("But it failed, since Rock-type Pokémon can't be salt cured!")) if show_message
+            return true
+        end
+    end
+
+    def pbEffectAgainstTarget(user, target)
+        if @healing
+            target.applyEffect(:SaltCureHealing)
+        else
+            target.applyEffect(:SaltCureDamage)
+        end
+    end
+end
+
+#===============================================================================
 # The target starts losing 1/8th of its health every turn. When it does,
 # Coins equal to 10 times the HP lost are scattered on the opposing side.
 # (Pharaoh's Curse)

@@ -329,6 +329,97 @@ class PokeBattle_Move_StealsItem < PokeBattle_Move
 end
 
 #===============================================================================
+# User steals the target's items. If a stolen item is consumable, the user
+# immediately consumes it, if possible. (Squawkabilly's Squabble)
+#===============================================================================
+class PokeBattle_Move_StealsAndConsumesItem < PokeBattle_Move
+    def pbEffectWhenDealingDamage(user, target)
+        target.eachItemWithName do |item, itemName|
+            return unless canRemoveItem?(user, target, item)
+            stolenItemName = getItemName(item)
+            if @battle.stolenItemTurnsToDust?(item)
+                target.removeItem(item)
+                @battle.pbDisplay(_INTL("{1}'s stolen {2} turned to dust.", user.pbThis, stolenItemName))
+            else
+                itemData = GameData::Item.get(item)
+                if itemData.is_berry? || itemData.is_herb? || 
+                    user.pbHeldItemTriggerCheck(item, false)
+                else case item 
+                when :WEAKNESSPOLICY
+                    statUp = [:ATTACK, 4, :SPECIAL_ATTACK, 4]
+                    target.removeItem(item)
+                    @battle.pbCommonAnimation("UseItem", user)
+                    @battle.pbDisplay(_INTL("{1} activated its stolen {2}!", user.pbThis, stolenItemName))
+                    user.pbRaiseMultipleStatSteps(statUp, user, item: item)
+                when :ADRENALINEORB, :INSOLES, :PINWHEEL
+                    target.removeItem(item)
+                    @battle.pbCommonAnimation("UseItem", user)
+                    @battle.pbDisplay(_INTL("{1} activated its stolen {2}!", user.pbThis, stolenItemName))
+                    user.tryRaiseStat(:SPEED, user, item: item, increment: 2)
+                when :WHETSTONE
+                    target.removeItem(item)
+                    @battle.pbCommonAnimation("UseItem", user)
+                    @battle.pbDisplay(_INTL("{1} activated its stolen {2}!", user.pbThis, stolenItemName))
+                    user.tryRaiseStat(:ATTTACK, user, item: item, increment: 2)
+                when :THROATSPRAY
+                    target.removeItem(item)
+                    @battle.pbCommonAnimation("UseItem", user)
+                    @battle.pbDisplay(_INTL("{1} activated its stolen {2}!", user.pbThis, stolenItemName))
+                    user.tryRaiseStat(:SPECIAL_ATTACK, user, item: item, increment: 2)
+                when :PROTEINSHAKE, :STRESSBALL
+                    target.removeItem(item)
+                    @battle.pbCommonAnimation("UseItem", user)
+                    @battle.pbDisplay(_INTL("{1} activated its stolen {2}!", user.pbThis, stolenItemName))
+                    user.applyFractionalHealing(1.0 / 3.0, item: item, canOverheal: true)
+                when :FLASHBULB, :WHITENINGPASTE
+                    target.removeItem(item)
+                    @battle.pbCommonAnimation("UseItem", user)
+                    @battle.pbDisplay(_INTL("{1} activated its stolen {2}!", user.pbThis, stolenItemName))
+                    user.eachOpposing do |b|
+                        b.applyEffect(:Blindness)
+                    end
+                when :EJECTBUTTON, :EJECTPACK
+                    target.removeItem(item)
+                    @battle.pbDisplay(_INTL("{1} activated its stolen {2}!", user.pbThis, stolenItemName))
+                    @battle.pbCommonAnimation("UseItem", user)
+                    switchOutUser(user)
+                when :REDCARD
+                    target.removeItem(item)
+                    newPkmn = @battle.pbGetReplacementPokemonIndex(target.index, true) # Random
+                    return if newPkmn < 0
+                    @battle.pbCommonAnimation("UseItem", user)
+                    @battle.pbDisplay(_INTL("{1} held up its stolen Red Card against {2}!", user.pbThis, target.pbThis))
+                    @battle.pbRecallAndReplace(target.index, newPkmn, true)
+                    @battle.pbDisplay(_INTL("{1} was dragged out!", target.pbThis))
+                    @battle.pbClearChoice(target.index)   # Replacement Pokémon does nothing this round
+                when :WATERBALLOON
+                    target.removeItem(item)
+                    return if user.effectActive?(:AquaRing)
+                    @battle.pbCommonAnimation("UseItem", user)
+                    @battle.pbDisplay(_INTL("{1} dropped its stolen {2}!", user.pbThis, stolenItemName))
+                    user.applyEffect(:AquaRing)
+                else
+                    stealItem(user, target, item)
+                end
+                end
+            end
+        end
+    end
+
+    def getEffectScore(user, target)
+        score = 0
+        target.eachItem do |item|
+            score += 50 if canStealItem?(user, target, item)
+        end
+        return score
+    end
+
+    def shouldHighlight?(user, target)
+        return target.hasAnyItem?
+    end
+end
+
+#===============================================================================
 # Steals the targets first stealable berry or gem.
 #===============================================================================
 class PokeBattle_Move_StealsBerryGem < PokeBattle_Move

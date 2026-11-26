@@ -177,6 +177,7 @@ def battleGuideVolatileStatusesHash
         _INTL("Grounded") => _INTL("A grounded Pokémon loses their immunity to ground moves (from being Flying-type or having a Levitate ability)."),
         _INTL("Shrinking") => _INTL("The affected Pokémon's highest stat becomes reduced by 2 steps for each turn of the effect."),
         _INTL("Sugar Rush") => _INTL("The affected Pokémon's speed is doubled, but they also take double damage from attacks."),
+        _INTL("Salt Cure") => _INL("If the affected Pokémon is an ally, it heals for 10% of its max HP at the end of each turn. If it's an opponent, it takes that much damage instead. Rock-types are immune."),
         _INTL("Overhealing") => _INTL("Certain abilities, moves or items can cause overhealing. A Pokémon can get up to double of its max HP via overhealing."),
     }
 end

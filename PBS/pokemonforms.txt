@@ -1045,3 +1045,12 @@ Abilities = BREAKTHROUGH,NOGUARD
 Height = 2.7
 Weight = 330.0
 Pokedex = This special Ursaluna can see in the dark with its left eye and protects itself with mud that is as hard as iron.
+#-------------------------------
+[SQUAWKABILLY,1]
+FormName = Blue Plumage
+#-------------------------------
+[SQUAWKABILLY,2]
+FormName = Yellow Plumage
+#-------------------------------
+[SQUAWKABILLY,3]
+FormName = Green Plumage

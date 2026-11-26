@@ -288,6 +288,10 @@ Name = Caffeine Rush
 Description = During hail, this Pokémon is twice as likely to crit and its Speed is boosted by 50%.
 Flags = HailSynergy
 #-------------------------------
+[CALCIFY]
+Name = Calcify
+Description = When hit with a special move, fractures the attacker.
+#-------------------------------
 [CALMINGSCUTECHARM]
 Name = Calming Scute Charm
 Description = After this Pokémon is hit thrice, a Sanctuary is set on its side for 5 turns. The attacker becomes drowsy.
@@ -1398,6 +1402,10 @@ Description = Pokémon that swap in for this have their Attack and Sp. Atk raise
 Name = Magnet Trap
 Description = When hit with a special move, traps and binds the attacker for three turns. Fails on turns the user switched in.
 #-------------------------------
+[MAKEASCENE]
+Name = Make a Scene
+Description = Recoil moves change this Pokémon's secondary type, and their recoil is split 50/50 with the target.
+#-------------------------------
 [MALICE]
 Name = Malice
 Description = If an attack lowers this Pokémon's HP below half, the attacker becomes cursed.
@@ -1808,6 +1816,10 @@ Name = Purest Light
 Description = Has Light That Burns the Sky as its 5th move.
 Flags = Immutable,ForceSignature
 #-------------------------------
+[PURIFYINGSALT]
+Name = Purifying Salt
+Description = Automatically curers this Pokémon's non-volatile status conditions (except sleep), restoring 1/8 max HP each time.
+#-------------------------------
 [PUZZLING]
 Name = Puzzling
 Description = Upon entry, creates a Puzzle Room for four turns, swapping unmodified Attack and Sp. Atk.
@@ -1844,6 +1856,7 @@ Description = Loses its Fire type. Whenever it uses a move, it gains that move's
 [RAINDANCER]
 Name = Rain Dancer
 Description = This Pokémon's Attack and Speed are increased by 30% during a rainstorm.
+Flags = RainstormSynergy
 #-------------------------------
 [RAINPRISM]
 Name = Rain Prism
