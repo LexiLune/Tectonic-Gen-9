@@ -95,6 +95,50 @@ class PokeBattle_Move_LowerTargetAllMainStats < PokeBattle_TargetMultiStatDownMo
 end
 
 #===============================================================================
+# Lowers the target's Attack, Defense, Speed, Special Attack and Special Defense
+# by 1 step each, and also torments, jinxes and disables them. All nine effects
+# persist after switching out, but fails unelss the target has damaged the user.
+# (Ninetales' Ninefold Vice)
+#===============================================================================
+class PokeBattle_Move_NinefoldVice < PokeBattle_Move
+    def pbFailsAgainstTarget?(user, target, show_message)
+        unless user.lastFoeAttacker.include?(target.index) || user.totalAttackers.include?(target.index)
+            @battle.pbDisplay(_INTL("But there wasn't enough spite to conjure anything!")) if show_message
+            return true
+        end
+        if target.pbOwnSide.effectActive?(:NinefoldVice)
+            if target.pbOwnSide.effects[:NinefoldVice][target.pokemonIndex] == target
+                @battle.pbDisplay(_INTL("But {1} has already inflicted its vices upon {2}!", user.pbThis(true), target.pbThis(true))) if show_message
+                return true
+            end
+        end
+    end
+    
+    def pbEffectAgainstTarget(user, target)
+        return if target.damageState.substitute
+        target.pbLowerMultipleStatSteps(ALL_STATS_1, user, move: self)
+        target.applyEffect(:Jinxed, applyEffectDurationModifiers(99, user))
+        target.applyEffect(:Torment)
+        target.applyEffect(:Disable, 99)
+        if target.pbOwnSide.effectActive?(:NinefoldVice)
+            target.pbOwnSide.effects[:NinefoldVice][target.pokemonIndex] = target
+        else
+            target.pbOwnSide.effects[:NinefoldVice] = {
+                target.pokemonIndex => target,
+            }
+        end
+        if target.pbOwnSide.effectActive?(:NinefoldViceDisabledMove)
+            target.pbOwnSide.effects[:NinefoldViceDisabledMove][target.pokemonIndex] = target.lastRegularMoveUsed
+        else
+            target.pbOwnSide.effects[:NinefoldViceDisabledMove] = {
+                target.pokemonIndex => target.lastRegularMoveUsed,
+            }
+        end
+    end
+
+end
+
+#===============================================================================
 # Lowers the target's Defense, Sp. Def, and Evasion by 3. Can't miss. (Echolocate)
 #===============================================================================
 class PokeBattle_Move_CantMissLowerTargetDefSpDefEvasion3 < PokeBattle_TargetMultiStatDownMove

@@ -418,7 +418,7 @@ GameData::BattleEffect.register_effect(:Battler, {
     :type => :Integer,
     :ticks_down_eor => true,
     :apply_proc => proc do |_battle, battler, _value|
-        battler.applyEffect(:DisableMove, battler.lastRegularMoveUsed)
+        battler.applyEffect(:DisableMove, battler.lastRegularMoveUsed) if battler.lastRegularMoveUsed
     end,
     :disable_proc => proc do |battle, battler|
         battle.pbDisplay(_INTL("{1}'s broke out of the disable!", battler.pbThis))

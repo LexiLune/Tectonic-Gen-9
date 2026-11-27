@@ -5943,7 +5943,7 @@ Type = ELECTRIC
 Category = Physical
 Power = 85
 Accuracy = 100
-TotalPP = 5
+TotalPP = 10
 Target = NearOther
 FunctionCode = FlinchesIfTargetStatused
 Flags = CanProtect
@@ -9100,6 +9100,16 @@ Target = NearOther
 FunctionCode = Basic
 Flags = CanProtect
 Description = The user invokes forbidden celestial powers to smite the target.
+#-------------------------------
+[NINEFOLDVICE]
+Name = Ninefold Vice
+Type = FAIRY
+Category = Status
+Accuracy = 0
+TotalPP = 3
+Target = NearOther
+FunctionCode = NinefoldVice
+Description = Lowers all the target's stats and jinxes, torments and disables them. Persists all battle, but fails unless they've damaged the user.
 #-------------------------------
 [PIXIEPUNCH]
 Name = Pixie Punch

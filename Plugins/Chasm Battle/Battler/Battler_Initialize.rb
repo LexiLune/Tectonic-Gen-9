@@ -242,6 +242,7 @@ class PokeBattle_Battler
     def resetTrackers
         @fainted               = @hp.zero? || @pokemon.afraid?
         @initialHP             = 0
+        @totalAttackers        = []
         @lastAttacker          = []
         @lastFoeAttacker       = []
         @lastHPLost            = 0

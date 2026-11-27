@@ -966,6 +966,32 @@ GameData::BattleEffect.register_effect(:Side, {
 })
 
 GameData::BattleEffect.register_effect(:Side, {
+    :id => :NinefoldVice,
+    :real_name => "Ninefold Vice",
+    :info_displayed => false,
+    :type => :Hash,
+    :entry_proc => proc do |battle, battlerIndex, side, battler, value|
+        echoln(value.to_s)
+        if value.key?(battler.pokemonIndex)
+            battle.pbDisplay(_INTL("Spiteful vices still linger around {1}...", battler.pbThis))
+            battler.pbLowerMultipleStatSteps(ALL_STATS_1, nil)
+            battler.applyEffect(:Jinxed, 99)
+            battler.applyEffect(:Torment)
+            battler.applyEffect(:Disable, 99)
+            moveToDisable = battler.pbOwnSide.effects[:NinefoldViceDisabledMove][battler.pokemonIndex]
+            battler.applyEffect(:DisableMove, moveToDisable)
+        end
+    end,
+})
+
+GameData::BattleEffect.register_effect(:Side, {
+    :id => :NinefoldViceDisabledMove,
+    :real_name => "Ninefold Vice Disabled Move",
+    :info_displayed => false,
+    :type => :Hash,
+})
+
+GameData::BattleEffect.register_effect(:Side, {
     :id => :DevolvedAllBattle,
     :real_name => "Devolved All Battle",
     :info_displayed => false,

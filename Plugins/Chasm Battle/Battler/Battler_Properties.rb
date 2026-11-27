@@ -5,7 +5,7 @@ class PokeBattle_Battler
     attr_accessor :gender, :iv, :steps, :captured, :effects
 
     # Trackers
-    attr_accessor  :participants, :lastAttacker, :lastFoeAttacker, :lastHPLost, :lastHPLostFromFoe
+    attr_accessor  :participants, :totalAttackers, :lastAttacker, :lastFoeAttacker, :lastHPLost, :lastHPLostFromFoe
     attr_accessor  :lastMoveUsed, :lastMoveUsedTypes, :lastMoveUsedCategory, :moveUsageHistory # All moves used, in order
     attr_accessor  :lastRoundMove, :lastRoundMoveCategory
     attr_accessor  :lastRegularMoveUsed, :lastRegularMoveTarget, :usedDamagingMove

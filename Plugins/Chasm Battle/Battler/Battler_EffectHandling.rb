@@ -86,6 +86,7 @@ class PokeBattle_Battler
         @tookSpecialHitLastRound              = @tookSpecialHit
         @tookSpecialHit                       = false
         @lastRoundMoveFailed                  = @lastMoveFailed
+        @totalAttackers.concat(@lastFoeAttacker)
         @lastAttacker.clear
         @lastFoeAttacker.clear
         @indicesTargetedRoundBeforeLast = @indicesTargetedLastRound.clone
