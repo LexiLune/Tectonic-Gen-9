@@ -595,6 +595,21 @@ BattleHandlers::UserAbilityEndOfMove.add(:OVERTHINKING,
   }
 )
 
+BattleHandlers::UserAbilityEndOfMove.add(:ELDRITCHKNIGHT,
+  proc { |ability, user, targets, move, _battle, _switchedBattlers|
+      next if user.dummy
+      next unless move.damagingMove?
+      hitAnything = false
+      targets.each do |b|
+          next if b.damageState.unaffected
+          hitAnything = true
+          break
+      end
+      next unless hitAnything
+      user.pbLowerMultipleStatSteps(ATTACKING_STATS_1, user, ability: ability)
+  }
+)
+
 BattleHandlers::UserAbilityEndOfMove.add(:FUELHUNGRY,
   proc { |ability, user, targets, move, _battle, _switchedBattlers|
       next if user.dummy

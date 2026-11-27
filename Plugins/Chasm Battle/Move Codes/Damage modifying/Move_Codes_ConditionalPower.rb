@@ -709,3 +709,17 @@ class PokeBattle_Move_CritsAgainstUnmodifiedStatsRaiseTargetMainStatsOne < PokeB
         return !target.hasAlteredStatSteps?
     end
 end
+
+#===============================================================================
+# Always critical if the user has any lowered stat steps.
+# (Ceruledge's Bitter Blade)
+#===============================================================================
+class PokeBattle_Move_CritIfUserStatsLowered < PokeBattle_Move
+    def pbCriticalOverride(user, _target)
+        return 1 if user.hasLoweredStatSteps?
+        return 0
+    end
+    def shouldHighlight?(user, _target)
+        return user.hasLoweredStatSteps?
+    end
+end

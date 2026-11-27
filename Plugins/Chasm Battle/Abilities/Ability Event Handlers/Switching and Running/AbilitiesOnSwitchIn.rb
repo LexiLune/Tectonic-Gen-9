@@ -1008,6 +1008,24 @@ BattleHandlers::AbilityOnSwitchIn.add(:RUSTWRACK,
   }
 )
 
+BattleHandlers::AbilityOnSwitchIn.add(:ELDRITCHKNIGHT,
+  proc { |ability, battler, battle, aiCheck|
+      next 10 if aiCheck
+      battle.pbShowAbilitySplash(battler, ability)
+      battle.pbDisplay(_INTL("{1} is clad in enchanted armor!", battler.pbThis))
+      battle.pbHideAbilitySplash(battler)
+  }
+)
+
+BattleHandlers::AbilityOnSwitchIn.add(:HEXBLADE,
+  proc { |ability, battler, battle, aiCheck|
+      next 10 if aiCheck
+      battle.pbShowAbilitySplash(battler, ability)
+      battle.pbDisplay(_INTL("{1} wields spectral steel!", battler.pbThis))
+      battle.pbHideAbilitySplash(battler)
+  }
+)
+
 BattleHandlers::AbilityOnSwitchIn.add(:SLUGGISH,
   proc { |ability, battler, battle, aiCheck|
       next 10 if aiCheck

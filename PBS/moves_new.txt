@@ -4329,6 +4329,32 @@ Flags = CanProtect,Light
 Description = Charges by summoning sunshine for five turns, then overwhelms the foe with fiery light on the second turn.
 Animation = FIREBLAST
 #-------------------------------
+[ARMORCANNON]
+Name = Armor Cannon
+Type = FIRE
+Category = Special
+Power = 115
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = LowerUserDefSpDef2
+Flags = CanProtect,Pulse
+Description = Unleashes an explosive blast from within the user's armor. Lowers the user's Defense and Sp. Def by two steps.
+Animation = FOCUSBLAST
+#-------------------------------
+[BITTERBLADE]
+Name = Bitter Blade
+Type = FIRE
+Category = Physical
+Power = 85
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = CritIfUserStatsLowered
+Flags = CanProtect,Slice
+Description = Slashes the target with malevolent intent. Always critically hits if the user has lowered stat steps.
+Animation = SACREDSWORD
+#-------------------------------
 [BLAZINGSPEED]
 Name = Blazing Speed
 Type = FIRE

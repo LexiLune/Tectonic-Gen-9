@@ -609,6 +609,10 @@ Description = Repeats another Pokémon's sound and pulse moves immediately at 50
 Name = Efflorescent
 Description = This Pokémon and its allies are protected from flinching, Intimidate, Fascinate, and Frustrate.
 #-------------------------------
+[ELDRITCHKNIGHT]
+Name = Eldritch Knight
+Description = This Pokémon is also Steel-type, but its Attack and Sp. Atk are lowered after attacking.
+#-------------------------------
 [EMANATION]
 Name = Emanation
 Description = Boosts the power of pulse moves by 30%.
@@ -1066,6 +1070,10 @@ Flags = Immutable
 Name = Hero's Journey
 Description = After switching in for a fainted ally, using a status move and knocking out a foe, heals to full and transforms.
 Flags = Immutable
+#-------------------------------
+[HEXBLADE]
+Name = Hexblade
+Description = This Pokémon is also Steel-type, but it can't regain hit points during battle.
 #-------------------------------
 [HIGHJUDGE]
 Name = High Judge

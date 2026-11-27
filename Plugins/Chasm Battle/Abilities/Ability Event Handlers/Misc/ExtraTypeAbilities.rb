@@ -19,6 +19,8 @@ BattleHandlers::TypeCalcAbility.add(:RUSTWRACK,
     }
 )
 
+BattleHandlers::TypeCalcAbility.copy(:RUSTWRACK, :ELDRITCHKNIGHT, :HEXBLADE)
+
 BattleHandlers::TypeCalcAbility.add(:SLUGGISH,
     proc { |ability, battler, types|
         types.push(:BUG)

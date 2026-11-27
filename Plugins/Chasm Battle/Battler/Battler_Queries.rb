@@ -468,6 +468,7 @@ class PokeBattle_Battler
             return false
         end
         return false if effectActive?(:HealBlock)
+        return false if hasActiveAbility?(:HEXBLADE)
         return false if pbOwnSide.effectActive?(:Dustbowl)
         return true
     end
